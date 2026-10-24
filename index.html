@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Анти-ИИ Квен Академия | Физика ГВЭ-9 2027</title>
+  <meta name="description" content="Бесплатный тренажёр для ГВЭ-9 по физике 2027: 100/200 варианты, устная форма, справочник, критерии, план подготовки." />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    * { box-sizing: border-box; }
+    :root, [data-theme="dark"] {
+      --bg: #04140a;
+      --bg-grad1: rgba(34, 255, 136, 0.18);
+      --bg-grad2: rgba(0, 204, 102, 0.14);
+      --card: rgba(14, 38, 22, 0.78);
+      --card-soft: rgba(34, 255, 136, 0.06);
+      --border: rgba(34, 255, 136, 0.2);
+      --border-strong: rgba(34, 255, 136, 0.4);
+      --text: #e8ffec;
+      --text-soft: #b8e6c4;
+      --muted: #9ac8a8;
+      --accent: #22ff88;
+      --accent2: #00cc66;
+      --accent-text: #04140a;
+      --light-green: rgba(34, 255, 136, 0.1);
+      --red: #ef4444;
+      --orange: #f59e0b;
+      --blue: #3b82f6;
+      --green: #22c55e;
+      --green-light: rgba(34, 197, 94, 0.15);
+      --green-border: rgba(34, 197, 94, 0.4);
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      --header-bg: rgba(4, 20, 10, 0.85);
+    }
+    [data-theme="light"] {
+      --bg: #f0fdf4;
+      --bg-grad1: rgba(34, 197, 94, 0.12);
+      --bg-grad2: rgba(21, 128, 61, 0.08);
+      --card: #ffffff;
+      --card-soft: #f8fafc;
+      --border: #bbf7d0;
+      --border-strong: #22c55e;
+      --text: #166534;
+      --text-soft: #334155;
+      --muted: #64748b;
+      --accent: #22c55e;
+      --accent2: #15803d;
+      --accent-text: #ffffff;
+      --light-green: #dcfce7;
+      --red: #ef4444;
+      --orange: #f59e0b;
+      --blue: #3b82f6;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --green-border: #bbf7d0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      --header-bg: rgba(255, 255, 255, 0.95);
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, var(--bg-grad1), transparent 30%),
+        radial-gradient(circle at top right, var(--bg-grad2), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .container { width: min(1120px, 92%); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 14px 0; flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-logo {
+      width: 46px; height: 46px; border-radius: 15px; object-fit: cover;
+      background: var(--light-green);
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 12px 30px rgba(34, 255, 136, 0.2);
+      flex: 0 0 auto;
+    }
+    .brand strong { display: block; font-size: 16px; line-height: 1.2; }
+    .brand small { color: var(--muted); font-size: 12px; }
+    nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav a { color: var(--text-soft); text-decoration: none; font-weight: 700; font-size: 14px; transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+    .top-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-left: auto; }
+    .icon-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--border-strong);
+      background: var(--light-green);
+      color: var(--muted); border-radius: 999px; padding: 8px 12px;
+      font-weight: 850; cursor: pointer; transition: 0.15s ease;
+      font-size: 13px;
+    }
+    .icon-btn:hover { background: var(--card-soft); color: var(--accent); }
+    .lang-option { opacity: 0.6; }
+    .lang-option.active { opacity: 1; color: var(--accent); }
+    .timer-widget {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--light-green);
+      border: 1px solid var(--border-strong);
+      border-radius: 14px; padding: 6px 8px;
+    }
+    .timer-widget select {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 6px 8px; font: inherit; font-size: 12px; max-width: 160px;
+    }
+    .timer-widget select option { background: var(--card); color: var(--text); }
+    #timerDisplay {
+      font-variant-numeric: tabular-nums; font-weight: 900;
+      min-width: 84px; text-align: center; color: var(--text); font-size: 13px;
+    }
+    .timer-btn {
+      border: 0; background: var(--card-soft); color: var(--text);
+      border-radius: 10px; padding: 6px 9px; cursor: pointer; font-size: 14px;
+      transition: 0.15s ease;
+    }
+    .timer-btn:hover { background: var(--light-green); }
+    .timer-widget.warning #timerDisplay { color: var(--orange); }
+    .timer-widget.danger #timerDisplay { color: var(--red); animation: pulse 1s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+    .hero {
+      display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px;
+      padding: 48px 0 28px; align-items: start;
+    }
+    .badge {
+      display: inline-flex; align-items: center; padding: 8px 12px;
+      border-radius: 999px; background: var(--light-green);
+      border: 1px solid var(--border-strong);
+      color: var(--accent); font-size: 13px; font-weight: 700;
+    }
+    h1 { font-size: clamp(32px, 5vw, 54px); line-height: 1.05; margin: 16px 0; }
+    h1 .accent { color: var(--accent); }
+    .lead { color: var(--text-soft); max-width: 72ch; font-size: 17px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+    .btn {
+      border: 0; border-radius: 14px; padding: 14px 18px; font-weight: 850;
+      cursor: pointer; transition: transform .15s ease, box-shadow .15s ease;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: var(--accent-text); box-shadow: 0 12px 30px rgba(34, 255, 136, 0.22);
+      font-size: 15px;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.secondary {
+      background: var(--light-green);
+      border: 1px solid var(--border-strong);
+      color: var(--text); box-shadow: none;
+    }
+    .btn.secondary:hover { background: var(--card-soft); }
+    .btn.small { padding: 10px 14px; font-size: 14px; border-radius: 12px; }
+    .btn-success {
+      background: linear-gradient(135deg, #16a34a, var(--green));
+      color: white;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.25);
+      border: 1px solid var(--green-border);
+    }
+    .btn-success:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: 24px; padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .panel h3 { margin: 0 0 14px; font-size: 20px; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
+    .metric {
+      background: var(--light-green); border-radius: 16px;
+      padding: 14px; border: 1px solid var(--border); min-height: 82px;
+    }
+    .metric strong { display: block; font-size: 22px; color: var(--text); margin-bottom: 4px; }
+    .metric span { color: var(--muted); font-size: 12px; }
+    progress {
+      width: 100%; height: 10px; border-radius: 999px; overflow: hidden;
+      appearance: none; background: var(--light-green); border: none; margin-top: 10px;
+    }
+    progress::-webkit-progress-bar { background: var(--light-green); border-radius: 999px; }
+    progress::-webkit-progress-value { background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 999px; }
+    progress::-moz-progress-bar { background: var(--accent); border-radius: 999px; }
+    .note { color: var(--muted); font-size: 13px; margin-top: 12px; }
+    section { padding: 28px 0; }
+    .section-head {
+      display: flex; justify-content: space-between; align-items: end;
+      gap: 16px; margin-bottom: 18px; flex-wrap: wrap;
+    }
+    h2 { font-size: clamp(24px, 3vw, 34px); margin: 0; line-height: 1.15; }
+    .sub { color: var(--muted); margin: 6px 0 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 22px; padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .card h3 { margin: 0 0 10px; font-size: 20px; }
+    .card p { color: var(--text-soft); margin: 0 0 16px; }
+    .warn-card { border-color: rgba(245, 158, 11, 0.4); }
+    .danger-card { border-color: rgba(239, 68, 68, 0.4); }
+    .success-card { border-color: var(--green-border); }
+    .tag {
+      display: inline-block; padding: 6px 10px; border-radius: 999px;
+      font-size: 12px; font-weight: 850; margin-bottom: 10px;
+      background: var(--light-green); border: 1px solid var(--border-strong);
+      color: var(--accent);
+    }
+    .tag.red { background: rgba(239,68,68,.14); border-color: rgba(239,68,68,.4); color: var(--red); }
+    .tag.green { background: var(--green-light); border-color: var(--green-border); color: var(--green); }
+    .tag.orange { background: rgba(245,158,11,.14); border-color: rgba(245,158,11,.4); color: var(--orange); }
+    .mini-list { margin: 0; padding-left: 18px; color: var(--text-soft); font-size: 14px; }
+    .mini-list li { margin: 7px 0; }
+    .filter-bar {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
+      padding: 14px; background: var(--card-soft);
+      border: 1px solid var(--border); border-radius: 16px; align-items: center;
+    }
+    .filter-bar > span { color: var(--muted); font-size: 13px; font-weight: 700; margin-right: 6px; }
+    .filter-btn {
+      padding: 8px 14px; border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      background: var(--light-green); color: var(--text);
+      cursor: pointer; font-size: 13px; font-weight: 700; transition: .15s ease;
+    }
+    .filter-btn:hover { background: var(--card-soft); }
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      border-color: transparent; color: var(--accent-text);
+    }
+    .question-block {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 24px; margin-bottom: 26px;
+      box-shadow: var(--shadow);
+    }
+    .q-number {
+      display: inline-block; padding: 6px 12px; border-radius: 999px;
+      background: var(--light-green); border: 1px solid var(--border-strong);
+      color: var(--accent); font-size: 13px; font-weight: 850; margin-bottom: 14px;
+    }
+    .q-part { margin-bottom: 18px; }
+    .q-part-label {
+      display: inline-block; font-size: 12px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .5px;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .q-text {
+      font-size: 17px; font-weight: 700; margin: 0; line-height: 1.5;
+      color: var(--text); white-space: pre-wrap;
+    }
+    .q-svg {
+      margin: 16px 0; padding: 12px;
+      background: var(--card-soft); border: 1px solid var(--border);
+      border-radius: 16px; display: flex; justify-content: center;
+    }
+    .q-svg svg { max-width: 100%; height: auto; display: block; }
+    .q-info {
+      background: var(--light-green); border-left: 4px solid var(--accent);
+      border-radius: 0 14px 14px 0; padding: 16px 18px; margin: 18px 0;
+      color: var(--text-soft); font-size: 15px; line-height: 1.55; white-space: pre-wrap;
+    }
+    .q-trainer-label {
+      display: inline-block; font-size: 12px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .5px;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .options { display: grid; gap: 10px; }
+    .option {
+      text-align: left; width: 100%;
+      background: var(--card-soft);
+      border: 1px solid var(--border);
+      color: var(--text); border-radius: 14px; padding: 14px 16px;
+      cursor: pointer; font-size: 15px; transition: .15s ease; white-space: pre-wrap;
+    }
+    .option:hover:not(:disabled) { background: var(--light-green); border-color: var(--border-strong); }
+    .option.correct { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 700; }
+    .option.wrong { background: rgba(239,68,68,.18); border-color: var(--red); }
+    .option:disabled { cursor: default; }
+    .match-input-row {
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px;
+    }
+    .match-input-row input {
+      padding: 12px 16px; border-radius: 12px;
+      border: 1px solid var(--border-strong);
+      background: var(--card-soft); color: var(--text);
+      font-size: 18px; font-weight: 700; font-family: inherit;
+      width: 160px; text-align: center; letter-spacing: 4px;
+    }
+    .match-input-row input:focus { outline: none; border-color: var(--accent); background: var(--light-green); }
+    .result-block { margin-top: 14px; padding: 14px 16px; border-radius: 14px; }
+    .result-block.correct { background: var(--green-light); border: 1px solid var(--green-border); }
+    .result-block.wrong { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.4); }
+    .verdict { font-size: 17px; font-weight: 900; margin-bottom: 8px; }
+    .verdict.correct { color: var(--green); }
+    .verdict.wrong { color: var(--red); }
+    .result-row { margin: 6px 0; color: var(--text-soft); font-size: 15px; }
+    .result-row strong { color: var(--text); }
+    .source-row {
+      margin-top: 10px; padding-top: 10px;
+      border-top: 1px dashed var(--border-strong);
+      color: var(--muted); font-size: 13px;
+    }
+    .summary {
+      background: var(--light-green);
+      border: 1px solid var(--border-strong);
+      border-radius: 24px; padding: 24px; text-align: center; margin-top: 24px;
+    }
+    .summary .score { font-size: 48px; font-weight: 950; color: var(--accent); }
+    .reset-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; justify-content: flex-end; }
+    .checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .check-item {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--card-soft); border: 1px solid var(--border);
+      border-radius: 16px; padding: 14px; transition: .15s ease;
+    }
+    .check-item input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--accent); flex: 0 0 auto; cursor: pointer; }
+    .check-item label { cursor: pointer; color: var(--text-soft); font-size: 15px; }
+    .check-item.done { opacity: .75; background: var(--light-green); border-color: var(--border-strong); }
+    .check-item.done label { text-decoration: line-through; color: var(--muted); }
+    .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .day {
+      background: var(--card-soft); border: 1px solid var(--border);
+      border-radius: 18px; padding: 16px; min-height: 112px;
+      position: relative;
+    }
+    .day::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--accent); border-radius: 18px 0 0 18px;
+    }
+    .day b { display: block; color: var(--accent); margin-bottom: 6px; font-size: 14px; letter-spacing: .2px; }
+    .day p { margin: 0; color: var(--text-soft); font-size: 14px; }
+    .day.critical { border-color: rgba(239,68,68,.4); background: rgba(239,68,68,.08); }
+    .day.critical::before { background: var(--red); }
+    .topic-card { display: flex; flex-direction: column; }
+    .topic-card button { margin-top: auto; align-self: flex-start; }
+    .topic-card.studied { border-color: var(--green); background: var(--green-light); }
+    .manual-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 22px; padding: 20px; margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .manual-card h3 { margin: 0 0 10px; font-size: 20px; }
+    .manual-card p { color: var(--text-soft); margin: 8px 0; white-space: pre-wrap; }
+    .answer-hint {
+      margin-top: 10px; padding: 12px 14px; border-radius: 14px;
+      background: var(--light-green); border: 1px solid var(--border-strong);
+      color: var(--accent); font-size: 14px;
+      white-space: pre-wrap;
+    }
+    .check-input { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border-strong); }
+    .check-input label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+    .check-input textarea {
+      width: 100%; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--border-strong);
+      background: var(--card-soft); color: var(--text);
+      font-size: 15px; font-family: inherit; resize: vertical; min-height: 100px;
+    }
+    .check-input textarea:focus { outline: none; border-color: var(--accent); background: var(--light-green); }
+    .support-card {
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: 24px; padding: 24px;
+      box-shadow: var(--shadow); text-align: center;
+    }
+    .support-card h2 { margin-bottom: 10px; }
+    .support-card p { margin: 10px 0; color: var(--text-soft); }
+    .phone { color: var(--accent); font-weight: 900; text-decoration: none; border-bottom: 1px dashed var(--accent); }
+    .phone:hover { color: var(--accent2); }
+    .copy-status { margin-left: 8px; color: var(--accent); font-weight: 850; }
+    .support-card a.link { color: var(--accent); font-weight: 800; text-decoration: none; }
+    .support-card a.link:hover { text-decoration: underline; }
+    footer {
+      padding: 30px 0 50px; color: var(--muted); text-align: center;
+      border-top: 1px solid var(--border); margin-top: 30px;
+    }
+    .reference-table {
+      width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px;
+    }
+    .reference-table th, .reference-table td {
+      border: 1px solid var(--border); padding: 6px; text-align: left;
+    }
+    .reference-table th { background: var(--light-green); color: var(--accent); }
+    .formula-block {
+      background: var(--card-soft); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px; margin: 10px 0;
+      font-family: "Cambria Math", "Times New Roman", serif;
+      font-size: 15px; color: var(--text); line-height: 2;
+    }
+    .formula-block span { display: inline-block; margin-right: 20px; white-space: nowrap; }
+    .criteria-block {
+      background: var(--light-green); border: 1px solid var(--border-strong);
+      border-radius: 14px; padding: 16px; margin: 12px 0;
+      font-size: 14px; color: var(--text-soft);
+    }
+    .criteria-block strong { color: var(--accent); }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: 1fr; }
+      nav { gap: 12px; }
+      .top-controls { width: 100%; justify-content: space-between; }
+      .timer-widget select { max-width: 130px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="brand">
+        <img src="favicon.ico" class="brand-logo" alt="Anti-AI Qwen Academy" onerror="this.style.display='none'" />
+        <div>
+          <strong data-i18n="brandTitle">Анти-ИИ Квен Академия</strong>
+          <small data-i18n="brandSub">Физика • ГВЭ-9 • 2027</small>
+        </div>
+      </div>
+      <nav>
+        <a href="#structure" data-i18n="navStructure">Структура</a>
+        <a href="#topics" data-i18n="navTopics">Темы</a>
+        <a href="#trainer" data-i18n="navTrainer">Тренажёр</a>
+        <a href="#oral" data-i18n="navOral">Устная форма</a>
+        <a href="#references" data-i18n="navRefs">Справочник</a>
+        <a href="#checklist" data-i18n="navChecklist">Чек-лист</a>
+        <a href="#plan" data-i18n="navPlan">План</a>
+        <a href="#support" data-i18n="navSupport">Поддержать</a>
+      </nav>
+      <div class="top-controls">
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="Сменить тему">
+          <span id="themeIcon">🌙</span>
+        </button>
+        <button id="langToggle" class="icon-btn" type="button" aria-label="Сменить язык">
+          <span class="lang-option active" data-lang="ru">RU</span>
+          <span>/</span>
+          <span class="lang-option" data-lang="en">EN</span>
+        </button>
+        <div class="timer-widget" id="timerWidget" role="group" aria-label="Таймер экзамена">
+          <select id="timerPreset" aria-label="Пресет таймера"></select>
+          <span id="timerDisplay">02:30:00</span>
+          <button id="timerToggle" class="timer-btn" type="button">▶</button>
+          <button id="timerReset" class="timer-btn" type="button">↺</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="badge" data-i18n="badge">Бесплатно • HTML • Физика ГВЭ-9 2027 • 100/200 варианты</span>
+        <h1 data-i18n="h1">Поможем сдать <span class="accent">ГВЭ-9 по физике</span> правильно</h1>
+        <p class="lead" data-i18n="lead">
+          Один файл — работает без интернета. Внутри: разбор форматов (100-е и 200-е варианты),
+          устная форма (билеты), тренажёр с заданиями из официальных проектов ФИПИ 2027,
+          встроенные графики, справочные таблицы и план подготовки. Прогресс сохраняется в браузере.
+        </p>
+        <div class="actions">
+          <button class="btn" onclick="scrollToId('trainer')" data-i18n="actionTrainer">Пройти тренажёр</button>
+          <button class="btn secondary" onclick="scrollToId('references')" data-i18n="actionRefs">Открыть справочник</button>
+          <button class="btn secondary" onclick="scrollToId('structure')" data-i18n="actionStructure">Структура экзамена</button>
+        </div>
+      </div>
+      <aside class="panel">
+        <h3 data-i18n="quickStats">Твой прогресс</h3>
+        <div class="metrics">
+          <div class="metric">
+            <strong id="answeredCount">0/32</strong>
+            <span data-i18n="metricAnswered">заданий решено</span>
+          </div>
+          <div class="metric">
+            <strong id="correctCount">0</strong>
+            <span data-i18n="metricCorrect">правильных</span>
+          </div>
+          <div class="metric">
+            <strong id="checklistProgress">0%</strong>
+            <span data-i18n="metricChecklist">чек-лист</span>
+          </div>
+        </div>
+        <progress id="overall" value="0" max="100"></progress>
+        <p class="note" data-i18n="noteReset">Прогресс сохраняется в этом браузере.</p>
+      </aside>
+    </section>
+
+    <section id="structure">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="structureTitle">Структура ГВЭ-9 по физике 2027</h2>
+          <p class="sub" data-i18n="structureSub">Два письменных формата + устная форма.</p>
+        </div>
+      </div>
+      <div class="grid" id="structureGrid"></div>
+    </section>
+
+    <section id="topics">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="topicsTitle">Ключевые темы</h2>
+          <p class="sub" data-i18n="topicsSub">Отмечай темы, которые уже повторил.</p>
+        </div>
+      </div>
+      <div class="grid" id="topicsGrid"></div>
+    </section>
+
+    <section id="trainer">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="trainerTitle">Тренажёр ГВЭ-9 (письменная форма)</h2>
+          <p class="sub" data-i18n="trainerSub">
+            100-е и 200-е варианты из официальных проектов ФИПИ 2027.
+            Задания 1–14: краткий ответ. Задания 15–16: развернутый ответ (самопроверка).
+          </p>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <span data-i18n="filterShow">Показать:</span>
+        <button class="filter-btn active" data-filter="all" id="filterAll" onclick="setFilter('all', this)"></button>
+        <button class="filter-btn" data-filter="v100" id="filter100" onclick="setFilter('v100', this)"></button>
+        <button class="filter-btn" data-filter="v200" id="filter200" onclick="setFilter('v200', this)"></button>
+        <button class="filter-btn" data-filter="short" id="filterShort" onclick="setFilter('short', this)"></button>
+        <button class="filter-btn" data-filter="long" id="filterLong" onclick="setFilter('long', this)"></button>
+      </div>
+      <div class="reset-bar">
+        <button class="btn secondary small" onclick="resetAll()" data-i18n="resetAll">Сбросить ответы</button>
+      </div>
+      <div id="quizContainer"></div>
+      <div id="summaryBox"></div>
+    </section>
+
+    <section id="oral">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="oralTitle">Устная форма (Билеты)</h2>
+          <p class="sub" data-i18n="oralSub">
+            15 билетов по 2 вопроса: теоретический (до 6 баллов) + практическая задача (до 4 баллов).
+            Время подготовки: 40 минут. Максимум: 10 баллов.
+          </p>
+        </div>
+      </div>
+      <div class="criteria-block">
+        <strong data-i18n="oralCriteriaTheory">Критерии теории (0-6 баллов):</strong> полный ответ = 6, один необязательный пропущен = 5, два-три = 4, только обязательные = 3, для двух элементов = 2, для одного = 1, иначе = 0.<br/>
+        <strong data-i18n="oralCriteriaPractice">Критерии задачи (0-4 балла):</strong> полное правильное решение = 4, ошибка в расчётах или единицах = 3, ошибка в преобразованиях = 2, ошибка в формуле = 1, иначе = 0.
+      </div>
+      <div id="oralContainer"></div>
+    </section>
+
+    <section id="references">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="refsTitle">Справочные материалы</h2>
+          <p class="sub" data-i18n="refsSub">Разрешено использовать на экзамене.</p>
+        </div>
+      </div>
+      <div class="grid" id="refsGrid"></div>
+      <div class="card" style="margin-top:16px;">
+        <h3 data-i18n="refFormulas">Основные формулы</h3>
+        <div class="formula-block">
+          <strong style="color:var(--accent);">Механика:</strong><br/>
+          <span>v = S/t</span>
+          <span>x(t) = x₀ + v₀ₓt + aₓt²/2</span>
+          <span>vₓ(t) = v₀ₓ + aₓt</span>
+          <span>v = 2πR/T</span>
+          <span>a_ц = v²/R</span><br/>
+          <span>p = m/V</span>
+          <span>F = ma</span>
+          <span>F_тр = μN</span>
+          <span>F = kΔl</span>
+          <span>F = mg</span><br/>
+          <span>p = mv</span>
+          <span>A = F·S·cos(a)</span>
+          <span>N = A/t</span>
+          <span>E_k = mv²/2</span>
+          <span>E_p = mgh</span><br/>
+          <span>M = Fl</span>
+          <span>p = F/S</span>
+          <span>p = ρgh + p_atm</span>
+          <span>F_A = ρgV</span>
+          <span>λ = v·T</span>
+        </div>
+        <div class="formula-block">
+          <strong style="color:var(--accent);">Тепловые явления:</strong><br/>
+          <span>Q = cm(t₂ − t₁)</span>
+          <span>Q₁ + Q₂ + ... = 0</span>
+          <span>L = Q/m</span>
+          <span>λ = Q/m</span>
+          <span>q = Q/m</span>
+        </div>
+        <div class="formula-block">
+          <strong style="color:var(--accent);">Электромагнитные явления:</strong><br/>
+          <span>I = q/t</span>
+          <span>U = A/q</span>
+          <span>R = ρl/S</span>
+          <span>I = U/R</span><br/>
+          <span>Последовательное: I₁ = I₂; U = U₁ + U₂; R = R₁ + R₂</span><br/>
+          <span>Параллельное: U₁ = U₂; I = I₁ + I₂; R = R₁R₂/(R₁+R₂)</span><br/>
+          <span>A = U·I·t</span>
+          <span>P = U·I</span>
+          <span>Q = I²Rt</span>
+          <span>F_A = I·B·l·sin α</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="checklistTitle">Чек-лист подготовки</h2>
+          <p class="sub" data-i18n="checklistSub">Прогресс сохраняется.</p>
+        </div>
+      </div>
+      <ul class="checklist" id="checklistUl"></ul>
+    </section>
+
+    <section id="plan">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="planTitle">План подготовки: 25 дней</h2>
+          <p class="sub" data-i18n="planSub">Маршрут по структуре ГВЭ-9 2027.</p>
+        </div>
+      </div>
+      <div class="plan-grid" id="planGrid"></div>
+    </section>
+
+    <section id="support">
+      <div class="support-card">
+        <h2 data-i18n="supportTitle">🤝 ПОДДЕРЖАТЬ ПРОЕКТ 💚</h2>
+        <p data-i18n="supportP1"><strong>Приложение бесплатное. Было и останется.</strong></p>
+        <p data-i18n="supportP2">Все приложения бесплатны и без рекламы. Ваша помощь развивает офлайн-безопасность и образование.</p>
+        <p>
+          <span data-i18n="supportPhoneLabel">📱 ПЕРЕВОД ПО НОМЕРУ:</span>
+          <a class="phone" href="tel:89202275676">8-920-227-56-76</a>
+          <button class="btn small" onclick="copyPhone()" data-i18n="copyPhone">📋 Копировать</button>
+          <span id="copyStatus" class="copy-status" aria-live="polite"></span>
+        </p>
+        <p data-i18n="supportP3">✅ Мгновенно. Без комиссии. Безопасно.</p>
+        <p data-i18n="supportP4">❤️ Спасибо за поддержку!</p>
+        <p>🌟 👉 <a href="https://ancf-hue.github.io/" target="_blank" rel="noopener noreferrer" class="link" data-i18n="supportCatalog">Каталог офлайн-приложений Anti-AI Shield</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" data-i18n="footer">
+      Анти-ИИ Квен Академия • Бесплатный HTML-проект • Физика ГВЭ-9 2027
+    </div>
+  </footer>
+
+  <script>
+    const STORAGE = {
+      answers: "antiIqwenPhysicsGVE9_2027_answers_v7_green_design",
+      checklist: "antiIqwenPhysicsGVE9_2027_checklist_v7",
+      topics: "antiIqwenPhysicsGVE9_2027_topics_v7",
+      theme: "antiIqwenPhysicsGVE9_2027_theme",
+      lang: "antiIqwenPhysicsGVE9_2027_lang",
+      oral: "antiIqwenPhysicsGVE9_2027_oral_v7"
+    };
+
+    const I18N = {
+      ru: {
+        docTitle: "Анти-ИИ Квен Академия | Физика ГВЭ-9 2027",
+        brandTitle: "Анти-ИИ Квен Академия",
+        brandSub: "Физика • ГВЭ-9 • 2027",
+        navStructure: "Структура", navTopics: "Темы", navTrainer: "Тренажёр",
+        navOral: "Устная форма", navRefs: "Справочник", navChecklist: "Чек-лист", navPlan: "План", navSupport: "Поддержать",
+        badge: "Бесплатно • HTML • Физика ГВЭ-9 2027 • 100/200 варианты",
+        h1: 'Поможем сдать <span class="accent">ГВЭ-9 по физике</span> правильно',
+        lead: "Один файл — работает без интернета. Внутри: разбор форматов (100-е и 200-е варианты), устная форма (билеты), тренажёр с заданиями из официальных проектов ФИПИ 2027, встроенные графики, справочные таблицы и план подготовки. Прогресс сохраняется в браузере.",
+        actionTrainer: "Пройти тренажёр", actionRefs: "Открыть справочник", actionStructure: "Структура экзамена",
+        quickStats: "Твой прогресс",
+        metricAnswered: "заданий решено", metricCorrect: "правильных", metricChecklist: "чек-лист",
+        noteReset: "Прогресс сохраняется в этом браузере.",
+        structureTitle: "Структура ГВЭ-9 по физике 2027",
+        structureSub: "Два письменных формата + устная форма.",
+        topicsTitle: "Ключевые темы", topicsSub: "Отмечай темы, которые уже повторил.",
+        trainerTitle: "Тренажёр ГВЭ-9 (письменная форма)",
+        trainerSub: "100-е и 200-е варианты из официальных проектов ФИПИ 2027. Задания 1–14: краткий ответ. Задания 15–16: развернутый ответ (самопроверка).",
+        filterShow: "Показать:", filterAll: "Все", filter100: "100-е", filter200: "200-е", filterShort: "Краткие (1-14)", filterLong: "Развернутые (15-16)",
+        resetAll: "Сбросить ответы",
+        oralTitle: "Устная форма (Билеты)",
+        oralSub: "15 билетов по 2 вопроса: теоретический (до 6 баллов) + практическая задача (до 4 баллов). Время подготовки: 40 минут. Максимум: 10 баллов.",
+        oralCriteriaTheory: "Критерии теории (0-6 баллов):",
+        oralCriteriaPractice: "Критерии задачи (0-4 балла):",
+        refsTitle: "Справочные материалы",
+        refsSub: "Разрешено использовать на экзамене.",
+        refFormulas: "Основные формулы",
+        checklistTitle: "Чек-лист подготовки", checklistSub: "Прогресс сохраняется.",
+        planTitle: "План подготовки: 25 дней", planSub: "Маршрут по структуре ГВЭ-9 2027.", dayPrefix: "День",
+        supportTitle: "🤝 ПОДДЕРЖАТЬ ПРОЕКТ 💚",
+        supportP1: "<strong>Приложение бесплатное. Было и останется.</strong>",
+        supportP2: "Все приложения бесплатны и без рекламы. Ваша помощь развивает офлайн-безопасность и образование.",
+        supportPhoneLabel: "📱 ПЕРЕВОД ПО НОМЕРУ:", copyPhone: "📋 Копировать", copied: "✓ Скопировано",
+        supportP3: "✅ Мгновенно. Без комиссии. Безопасно.", supportP4: "❤️ Спасибо за поддержку!",
+        supportCatalog: "Каталог офлайн-приложений Anti-AI Shield",
+        footer: "Анти-ИИ Квен Академия • Бесплатный HTML-проект • Физика ГВЭ-9 2027",
+        resultCorrect: "✅ Правильно!", resultWrong: "❌ Неправильно.",
+        correctAnswer: "Правильный ответ:", explanation: "Пояснение:", source: "Источник:",
+        summaryAnswered: "Пройдено:", summaryOf: "из", summaryCorrect: "Правильных:",
+        summaryFinish: "Ответь на все задания, чтобы увидеть итог.",
+        verdictExcellent: "Отличный результат! Ты хорошо готов к ГВЭ-9 2027.",
+        verdictGood: "Хорошо, но разбери ошибки по заданиям.",
+        verdictNeeds: "Нужно внимательно проработать задания ГВЭ-9 2027.",
+        resetConfirm: "Сбросить все ответы?",
+        copyFail: "Не удалось скопировать. Номер: ",
+        questionLabel1: "1. Вопрос", questionLabel2: "2. Информация", questionLabel3: "3. Тренажёр — ответь сам",
+        level100: "100-е варианты", level200: "200-е варианты",
+        source100: "ГВЭ-9 2027, 100-е варианты, задание {task}",
+        source200: "ГВЭ-9 2027, 200-е варианты, задание {task}",
+        timerBasic: "ГВЭ-9 — 150 мин", timerPractice: "Тренировка — 60 мин", timerUp: "Время вышло!",
+        timerStart: "Запустить", timerPause: "Пауза", timerReset: "Сброс",
+        oralTag: "Устная форма", oralTaskPrefix: "Билет",
+        oralSelfLabel: "Твой ответ (для самопроверки):",
+        oralPlaceholder: "Впиши свои рассуждения...",
+        refDensity: "Плотность веществ",
+        refHeatCap: "Удельная теплоёмкость",
+        refResistance: "Удельное сопротивление",
+        refConstants: "Константы",
+        refMelting: "Температура плавления/кипения",
+        refHeatLatent: "Удельная теплота",
+        matchPrompt: "Впиши последовательность цифр (без пробелов):",
+        matchPlaceholder: "Например: 42",
+        matchCheck: "Проверить"
+      },
+      en: {
+        docTitle: "Anti-AI Qwen Academy | Physics GVE-9 2027",
+        brandTitle: "Anti-AI Qwen Academy",
+        brandSub: "Physics • GVE-9 • 2027",
+        navStructure: "Structure", navTopics: "Topics", navTrainer: "Trainer",
+        navOral: "Oral Exam", navRefs: "References", navChecklist: "Checklist", navPlan: "Plan", navSupport: "Support",
+        badge: "Free • HTML • Physics GVE-9 2027 • 100/200 variants",
+        h1: 'Help you pass <span class="accent">GVE-9 Physics</span> correctly',
+        lead: "One file — works offline. Inside: breakdown of formats (100 and 200 variants), oral exam (tickets), trainer with tasks from official FIPI 2027 projects, embedded graphs, reference tables and preparation plan. Progress is saved in your browser.",
+        actionTrainer: "Start trainer", actionRefs: "Open references", actionStructure: "Exam structure",
+        quickStats: "Your progress",
+        metricAnswered: "tasks solved", metricCorrect: "correct", metricChecklist: "checklist",
+        noteReset: "Progress is saved in this browser.",
+        structureTitle: "GVE-9 Physics 2027 structure",
+        structureSub: "Two written formats + oral exam.",
+        topicsTitle: "Key topics", topicsSub: "Mark topics you've reviewed.",
+        trainerTitle: "GVE-9 Trainer (written form)",
+        trainerSub: "100 and 200 variants from official FIPI 2027 projects. Tasks 1–14: short answer. Tasks 15–16: long answer (self-check).",
+        filterShow: "Show:", filterAll: "All", filter100: "100", filter200: "200", filterShort: "Short (1-14)", filterLong: "Long (15-16)",
+        resetAll: "Reset answers",
+        oralTitle: "Oral Exam (Tickets)",
+        oralSub: "15 tickets with 2 questions: theory (up to 6 pts) + practical problem (up to 4 pts). Preparation: 40 min. Max: 10 pts.",
+        oralCriteriaTheory: "Theory criteria (0-6):",
+        oralCriteriaPractice: "Problem criteria (0-4):",
+        refsTitle: "Reference Materials",
+        refsSub: "Allowed during the exam.",
+        refFormulas: "Main formulas",
+        checklistTitle: "Preparation checklist", checklistSub: "Progress is saved.",
+        planTitle: "25-day preparation plan", planSub: "Route according to GVE-9 2027 structure.", dayPrefix: "Day",
+        supportTitle: "🤝 SUPPORT THE PROJECT 💚",
+        supportP1: "<strong>The app is free. It was and will remain free.</strong>",
+        supportP2: "All apps are free and ad-free. Your help develops offline security and education.",
+        supportPhoneLabel: "📱 TRANSFER BY PHONE:", copyPhone: "📋 Copy", copied: "✓ Copied",
+        supportP3: "✅ Instantly. No commission. Safe.", supportP4: "❤️ Thanks for your support!",
+        supportCatalog: "Catalog of Anti-AI Shield offline apps",
+        footer: "Anti-AI Qwen Academy • Free HTML project • Physics GVE-9 2027",
+        resultCorrect: "✅ Correct!", resultWrong: "❌ Wrong.",
+        correctAnswer: "Correct answer:", explanation: "Explanation:", source: "Source:",
+        summaryAnswered: "Completed:", summaryOf: "of", summaryCorrect: "Correct:",
+        summaryFinish: "Answer all tasks to see the result.",
+        verdictExcellent: "Excellent! You're well prepared for GVE-9 2027.",
+        verdictGood: "Good, but analyze your mistakes.",
+        verdictNeeds: "You need to carefully work through GVE-9 2027 tasks.",
+        resetConfirm: "Reset all answers?",
+        copyFail: "Could not copy. Number: ",
+        questionLabel1: "1. Question", questionLabel2: "2. Info", questionLabel3: "3. Trainer — answer yourself",
+        level100: "100 variants", level200: "200 variants",
+        source100: "GVE-9 2027, 100 variants, task {task}",
+        source200: "GVE-9 2027, 200 variants, task {task}",
+        timerBasic: "GVE-9 — 150 min", timerPractice: "Practice — 60 min", timerUp: "Time is up!",
+        timerStart: "Start", timerPause: "Pause", timerReset: "Reset",
+        oralTag: "Oral Exam", oralTaskPrefix: "Ticket",
+        oralSelfLabel: "Your answer (for self-check):",
+        oralPlaceholder: "Enter your reasoning...",
+        refDensity: "Density of substances",
+        refHeatCap: "Specific heat capacity",
+        refResistance: "Resistivity",
+        refConstants: "Constants",
+        refMelting: "Melting/boiling points",
+        refHeatLatent: "Latent heat",
+        matchPrompt: "Enter digit sequence (no spaces):",
+        matchPlaceholder: "Example: 42",
+        matchCheck: "Check"
+      }
+    };
+
+    let currentLang = localStorage.getItem(STORAGE.lang) || "ru";
+    let currentTheme = localStorage.getItem(STORAGE.theme) || "dark";
+    let currentFilter = "all";
+    let savedAnswers = {};
+    let checklistState = {};
+    let topicsState = {};
+    let oralNotes = {};
+
+    function loc(obj) { return obj && obj[currentLang] !== undefined ? obj[currentLang] : ""; }
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
+    }
+    function scrollToId(id) { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    function saveAll() {
+      localStorage.setItem(STORAGE.answers, JSON.stringify(savedAnswers));
+      localStorage.setItem(STORAGE.checklist, JSON.stringify(checklistState));
+      localStorage.setItem(STORAGE.topics, JSON.stringify(topicsState));
+      localStorage.setItem(STORAGE.oral, JSON.stringify(oralNotes));
+    }
+    function loadAll() {
+      try { savedAnswers = JSON.parse(localStorage.getItem(STORAGE.answers)) || {}; } catch(e) { savedAnswers = {}; }
+      try { checklistState = JSON.parse(localStorage.getItem(STORAGE.checklist)) || {}; } catch(e) { checklistState = {}; }
+      try { topicsState = JSON.parse(localStorage.getItem(STORAGE.topics)) || {}; } catch(e) { topicsState = {}; }
+      try { oralNotes = JSON.parse(localStorage.getItem(STORAGE.oral)) || {}; } catch(e) { oralNotes = {}; }
+    }
+
+    function applyTheme() {
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      const icon = document.getElementById("themeIcon");
+      if (icon) icon.textContent = currentTheme === "dark" ? "🌙" : "☀️";
+    }
+    function toggleTheme() {
+      currentTheme = currentTheme === "dark" ? "light" : "dark";
+      localStorage.setItem(STORAGE.theme, currentTheme);
+      applyTheme();
+      renderQuestions();
+      renderOral();
+    }
+
+    /* ============ SVG GRAPHICS ============ */
+    function svgVelocityGraph() {
+      return `
+        <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Velocity graph">
+          <rect x="0" y="0" width="400" height="220" fill="transparent"/>
+          <line x1="50" y1="180" x2="370" y2="180" stroke="var(--muted)" stroke-width="1.5"/>
+          <line x1="50" y1="180" x2="50" y2="30" stroke="var(--muted)" stroke-width="1.5"/>
+          <polygon points="370,180 362,176 362,184" fill="var(--muted)"/>
+          <polygon points="50,30 46,38 54,38" fill="var(--muted)"/>
+          <text x="355" y="200" fill="var(--text)" font-size="12">t, с</text>
+          <text x="15" y="35" fill="var(--text)" font-size="12">vₓ, м/с</text>
+          <g stroke="var(--border)" stroke-width="0.5" opacity="0.4">
+            <path d="M50,140H370M50,100H370M50,60H370M110,30V180M170,30V180M230,30V180M290,30V180M350,30V180"/>
+          </g>
+          <g fill="var(--text)" font-size="11" text-anchor="middle">
+            <text x="50" y="196">0</text>
+            <text x="110" y="196">2</text>
+            <text x="170" y="196">4</text>
+            <text x="230" y="196">6</text>
+            <text x="290" y="196">8</text>
+            <text x="350" y="196">10</text>
+          </g>
+          <g fill="var(--text)" font-size="11" text-anchor="end">
+            <text x="44" y="184">0</text>
+            <text x="44" y="144">5</text>
+            <text x="44" y="104">10</text>
+          </g>
+          <polyline points="50,180 170,180 170,104 290,104 350,180" fill="none" stroke="var(--accent)" stroke-width="3"/>
+          <circle cx="170" cy="104" r="4" fill="var(--accent)"/>
+          <circle cx="290" cy="104" r="4" fill="var(--accent)"/>
+        </svg>
+      `;
+    }
+    function svgWaveProfile() {
+      return `
+        <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wave profile">
+          <rect x="0" y="0" width="500" height="220" fill="transparent"/>
+          <line x1="20" y1="110" x2="480" y2="110" stroke="var(--muted)" stroke-width="1.5"/>
+          <polygon points="480,110 472,106 472,114" fill="var(--muted)"/>
+          <text x="465" y="130" fill="var(--text)" font-size="12">l</text>
+          <path d="M20,110 Q40,30 80,110 T140,110 T200,110 T260,110 T320,110 T380,110 T440,110" fill="none" stroke="var(--accent)" stroke-width="3"/>
+          <g fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">
+            <circle cx="80" cy="110" r="5" fill="var(--accent)"/><text x="80" y="135">A</text>
+            <circle cx="110" cy="110" r="5" fill="var(--accent)"/><text x="110" y="135">B</text>
+            <circle cx="140" cy="110" r="5" fill="var(--accent)"/><text x="140" y="135">C</text>
+            <circle cx="200" cy="110" r="5" fill="var(--accent)"/><text x="200" y="135">D</text>
+            <circle cx="260" cy="110" r="5" fill="var(--accent)"/><text x="260" y="135">E</text>
+          </g>
+        </svg>
+      `;
+    }
+    function svgLensImage() {
+      return `
+        <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lens image formation">
+          <rect x="0" y="0" width="500" height="260" fill="transparent"/>
+          <line x1="20" y1="140" x2="480" y2="140" stroke="var(--muted)" stroke-width="1.5"/>
+          <ellipse cx="250" cy="140" rx="12" ry="100" fill="none" stroke="var(--accent)" stroke-width="3"/>
+          <circle cx="180" cy="140" r="3" fill="var(--text)"/>
+          <circle cx="320" cy="140" r="3" fill="var(--text)"/>
+          <circle cx="110" cy="140" r="3" fill="var(--text)"/>
+          <circle cx="390" cy="140" r="3" fill="var(--text)"/>
+          <text x="175" y="160" fill="var(--text)" font-size="12">F</text>
+          <text x="315" y="160" fill="var(--text)" font-size="12">F</text>
+          <text x="95" y="160" fill="var(--text)" font-size="12">2F</text>
+          <text x="380" y="160" fill="var(--text)" font-size="12">2F</text>
+          <text x="245" y="160" fill="var(--text)" font-size="12">O</text>
+          <line x1="140" y1="140" x2="140" y2="80" stroke="var(--text)" stroke-width="3"/>
+          <polygon points="140,80 134,92 146,92" fill="var(--text)"/>
+          <text x="120" y="70" fill="var(--text)" font-size="11">Объект</text>
+          <line x1="390" y1="140" x2="390" y2="230" stroke="var(--red)" stroke-width="3"/>
+          <polygon points="390,230 384,218 396,218" fill="var(--red)"/>
+          <text x="400" y="225" fill="var(--red)" font-size="14" font-weight="bold">1</text>
+          <line x1="420" y1="140" x2="420" y2="90" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4"/>
+          <polygon points="420,90 414,102 426,102" fill="var(--muted)"/>
+          <text x="428" y="100" fill="var(--muted)" font-size="14">2</text>
+          <line x1="320" y1="140" x2="320" y2="190" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4"/>
+          <polygon points="320,190 314,178 326,178" fill="var(--muted)"/>
+          <text x="328" y="190" fill="var(--muted)" font-size="14">3</text>
+          <line x1="450" y1="140" x2="450" y2="250" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4"/>
+          <polygon points="450,250 444,238 456,238" fill="var(--muted)"/>
+          <text x="458" y="250" fill="var(--muted)" font-size="14">4</text>
+        </svg>
+      `;
+    }
+    function svgPressureVessels() {
+      return `
+        <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three vessels">
+          <rect x="0" y="0" width="500" height="200" fill="transparent"/>
+          <path d="M40,40 L40,160 L160,160 L160,40 Z" fill="none" stroke="var(--muted)" stroke-width="2"/>
+          <path d="M40,60 L160,60 L160,140 L40,140 Z" fill="var(--accent)" opacity="0.3"/>
+          <line x1="40" y1="60" x2="160" y2="60" stroke="var(--accent)" stroke-width="2"/>
+          <text x="95" y="185" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">1</text>
+          <path d="M200,40 L200,160 L320,160 L320,40 Z" fill="none" stroke="var(--muted)" stroke-width="2"/>
+          <rect x="200" y="60" width="120" height="80" fill="var(--accent)" opacity="0.3"/>
+          <line x1="200" y1="60" x2="320" y2="60" stroke="var(--accent)" stroke-width="2"/>
+          <text x="260" y="185" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">2</text>
+          <path d="M360,60 L360,160 L480,160 L480,60 L440,40 L400,40 Z" fill="none" stroke="var(--muted)" stroke-width="2"/>
+          <path d="M360,60 L480,60 L480,140 L360,140 Z" fill="var(--accent)" opacity="0.3"/>
+          <line x1="360" y1="60" x2="480" y2="60" stroke="var(--accent)" stroke-width="2"/>
+          <text x="420" y="185" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">3</text>
+        </svg>
+      `;
+    }
+    function svgCircuitDiagram() {
+      return `
+        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Electric circuit">
+          <rect x="0" y="0" width="400" height="250" fill="transparent"/>
+          <line x1="50" y1="100" x2="50" y2="150" stroke="var(--muted)" stroke-width="2"/>
+          <line x1="40" y1="110" x2="60" y2="110" stroke="var(--muted)" stroke-width="2"/>
+          <line x1="45" y1="120" x2="55" y2="120" stroke="var(--muted)" stroke-width="2"/>
+          <line x1="40" y1="130" x2="60" y2="130" stroke="var(--muted)" stroke-width="2"/>
+          <line x1="45" y1="140" x2="55" y2="140" stroke="var(--muted)" stroke-width="2"/>
+          <text x="30" y="130" fill="var(--text)" font-size="10">+</text>
+          <path d="M50,100 H150" stroke="var(--muted)" stroke-width="2" fill="none"/>
+          <path d="M50,150 H100 V200 H200" stroke="var(--muted)" stroke-width="2" fill="none"/>
+          <rect x="150" y="80" width="100" height="20" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <line x1="200" y1="70" x2="200" y2="90" stroke="var(--accent)" stroke-width="2"/>
+          <polygon points="200,90 195,80 205,80" fill="var(--accent)"/>
+          <path d="M200,70 H300 V105" stroke="var(--muted)" stroke-width="2" fill="none"/>
+          <circle cx="300" cy="120" r="15" fill="none" stroke="var(--muted)" stroke-width="2"/>
+          <text x="300" y="125" fill="var(--text)" font-size="12" text-anchor="middle">A</text>
+          <path d="M300,135 V180 H250" stroke="var(--muted)" stroke-width="2" fill="none"/>
+          <circle cx="200" cy="180" r="15" fill="none" stroke="var(--muted)" stroke-width="2"/>
+          <line x1="190" y1="170" x2="210" y2="190" stroke="var(--muted)" stroke-width="1"/>
+          <line x1="210" y1="170" x2="190" y2="190" stroke="var(--muted)" stroke-width="1"/>
+          <path d="M185,180 H100 V150 H50" stroke="var(--muted)" stroke-width="2" fill="none"/>
+          <text x="200" y="60" fill="var(--text)" font-size="12" text-anchor="middle">Реостат</text>
+          <text x="200" y="210" fill="var(--text)" font-size="12" text-anchor="middle">Лампочка</text>
+          <path d="M220,75 L240,75" stroke="var(--orange)" stroke-width="2"/>
+          <text x="230" y="65" fill="var(--orange)" font-size="11">влево</text>
+        </svg>
+      `;
+    }
+    const SVG_MAP = { velocity: svgVelocityGraph, wave: svgWaveProfile, lens: svgLensImage, vessels: svgPressureVessels, circuit: svgCircuitDiagram };
+    function getSvg(name) { return SVG_MAP[name] ? SVG_MAP[name]() : ""; }
+
+    /* ============ CONTENT ============ */
+    const structureCards = [
+      {
+        cardClass: "success-card", tagClass: "green",
+        tag: { ru: "100-е варианты", en: "100 variants" },
+        title: { ru: "16 заданий (14 кратких + 2 развернутых)", en: "16 tasks (14 short + 2 long)" },
+        items: [
+          { ru: "Для большинства участников ГВЭ (закрытые учреждения, ОВЗ, экстерны).", en: "For most GVE participants (closed institutions, HIA, external students)." },
+          { ru: "Задания 1, 6, 8, 12 — соответствие (2 балла).", en: "Tasks 1, 6, 8, 12 — matching (2 pts)." },
+          { ru: "Задания 2–5, 7, 9–11, 13–14 — один верный ответ (1 балл).", en: "Tasks 2–5, 7, 9–11, 13–14 — single choice (1 pt)." },
+          { ru: "Задания 15 (качественная, 2 балла) и 16 (расчётная, 3 балла).", en: "Tasks 15 (qualitative, 2 pts) and 16 (calculation, 3 pts)." },
+          { ru: "Максимум: 23 первичных балла.", en: "Max: 23 primary points." },
+          { ru: "Время: 2 часа 30 минут (150 минут).", en: "Time: 2 h 30 min (150 min)." }
+        ]
+      },
+      {
+        cardClass: "warn-card", tagClass: "orange",
+        tag: { ru: "200-е варианты", en: "200 variants" },
+        title: { ru: "Для слепых и слабовидящих", en: "For blind and visually impaired" },
+        items: [
+          { ru: "Структура аналогична 100-м вариантам (16 заданий).", en: "Structure similar to 100 variants (16 tasks)." },
+          { ru: "Нет заданий по теме «Оптика» (не проверяется).", en: "No tasks on 'Optics' topic (not checked)." },
+          { ru: "Минимум изображений, шрифт Брайля для слепых.", en: "Minimal images, Braille for blind." },
+          { ru: "Задания переформулированы: замена оптики на механику/теплоту.", en: "Tasks reformulated: optics replaced with mechanics/heat." },
+          { ru: "Максимум: 23 первичных балла.", en: "Max: 23 primary points." },
+          { ru: "Время: 2 часа 30 минут (150 минут).", en: "Time: 2 h 30 min (150 min)." }
+        ]
+      },
+      {
+        cardClass: "", tagClass: "",
+        tag: { ru: "Устная форма", en: "Oral form" },
+        title: { ru: "15 билетов по 2 вопроса", en: "15 tickets × 2 questions" },
+        items: [
+          { ru: "Теоретический вопрос (до 6 баллов).", en: "Theoretical question (up to 6 pts)." },
+          { ru: "Практическая задача (до 4 баллов).", en: "Practical problem (up to 4 pts)." },
+          { ru: "Время подготовки: 40 минут.", en: "Preparation time: 40 minutes." },
+          { ru: "Максимум: 10 баллов.", en: "Max: 10 points." },
+          { ru: "Непрограммируемый калькулятор + справочные материалы.", en: "Non-programmable calculator + reference materials." }
+        ]
+      }
+    ];
+
+    const topicsCards = [
+      { key: "mechanics", title: { ru: "Механические явления", en: "Mechanical phenomena" },
+        text: { ru: "Кинематика, динамика, статика, энергия, колебания, гидростатика, звук.", en: "Kinematics, dynamics, statics, energy, oscillations, hydrostatics, sound." } },
+      { key: "thermal", title: { ru: "Тепловые явления", en: "Thermal phenomena" },
+        text: { ru: "Внутренняя энергия, теплопередача, агрегатные состояния, влажность.", en: "Internal energy, heat transfer, states of matter, humidity." } },
+      { key: "electro", title: { ru: "Электромагнитные явления", en: "Electromagnetic phenomena" },
+        text: { ru: "Электростатика, постоянный ток, магнитное поле, электромагнитная индукция, оптика.", en: "Electrostatics, DC, magnetic field, electromagnetic induction, optics." } },
+      { key: "quantum", title: { ru: "Квантовые явления", en: "Quantum phenomena" },
+        text: { ru: "Строение атома, ядерные реакции, фотоэффект.", en: "Atomic structure, nuclear reactions, photoelectric effect." } },
+      { key: "methods", title: { ru: "Методы познания", en: "Scientific methods" },
+        text: { ru: "Измерения, погрешности, эксперимент, моделирование.", en: "Measurements, errors, experiment, modeling." } }
+    ];
+
+    const checklistItems = [
+      { key: "ph1", label: { ru: "Знаю структуру работы (16 заданий, 23 балла, 150 минут)", en: "Know work structure (16 tasks, 23 pts, 150 min)" } },
+      { key: "ph2", label: { ru: "Умею читать графики движения и силы", en: "Can read motion and force graphs" } },
+      { key: "ph3", label: { ru: "Знаю формулы скорости, ускорения, импульса", en: "Know velocity, acceleration, momentum formulas" } },
+      { key: "ph4", label: { ru: "Понимаю закон Архимеда и давление жидкости", en: "Understand Archimedes principle and fluid pressure" } },
+      { key: "ph5", label: { ru: "Умею рассчитывать количество теплоты (Q=cmΔt)", en: "Can calculate heat quantity (Q=cmΔt)" } },
+      { key: "ph6", label: { ru: "Знаю закон Ома и формулы мощности тока", en: "Know Ohm's law and power formulas" } },
+      { key: "ph7", label: { ru: "Умею строить изображения в линзах", en: "Can construct images in lenses" } },
+      { key: "ph8", label: { ru: "Понимаю ядерные реакции (законы сохранения)", en: "Understand nuclear reactions (conservation laws)" } },
+      { key: "ph9", label: { ru: "Умею оформлять решение задач (Дано, формулы, ответ)", en: "Can format problem solutions (Given, formulas, answer)" } },
+      { key: "ph10", label: { ru: "Проверяю размерности результатов вычислений", en: "Check dimensions of results" } }
+    ];
+
+    const planDays = [
+      { day: 1, critical: true, text: { ru: "Диагностика: структура ГВЭ-9 по физике, слабые темы.", en: "Diagnostics: GVE-9 physics structure, weak topics." } },
+      { day: 2, critical: false, text: { ru: "Кинематика: равномерное и равноускоренное движение, графики.", en: "Kinematics: uniform and accelerated motion, graphs." } },
+      { day: 3, critical: false, text: { ru: "Динамика: законы Ньютона, сила тяжести, трения, упругости.", en: "Dynamics: Newton's laws, gravity, friction, elasticity." } },
+      { day: 4, critical: false, text: { ru: "Статика и давление: рычаги, давление твердых тел и жидкостей.", en: "Statics and pressure: levers, solid and liquid pressure." } },
+      { day: 5, critical: false, text: { ru: "Гидростатика: закон Архимеда, плавание тел.", en: "Hydrostatics: Archimedes principle, floating bodies." } },
+      { day: 6, critical: false, text: { ru: "Работа, мощность, энергия. Закон сохранения энергии.", en: "Work, power, energy. Conservation of energy." } },
+      { day: 7, critical: false, text: { ru: "Колебания и волны. Звук. Свет (линзы).", en: "Oscillations and waves. Sound. Light (lenses)." } },
+      { day: 8, critical: false, text: { ru: "Тепловые явления: внутренняя энергия, теплопередача.", en: "Thermal phenomena: internal energy, heat transfer." } },
+      { day: 9, critical: false, text: { ru: "Агрегатные состояния вещества. Плавление, кипение.", en: "States of matter. Melting, boiling." } },
+      { day: 10, critical: false, text: { ru: "Электризация. Электрическое поле. Постоянный ток.", en: "Charging. Electric field. Direct current." } },
+      { day: 11, critical: false, text: { ru: "Закон Ома. Мощность тока. Джоуль-Ленц.", en: "Ohm's law. Power. Joule-Lenz." } },
+      { day: 12, critical: false, text: { ru: "Магнитное поле. Электромагнитная индукция.", en: "Magnetic field. Electromagnetic induction." } },
+      { day: 13, critical: false, text: { ru: "Оптика: отражение, преломление, линзы (для 100-х).", en: "Optics: reflection, refraction, lenses (for 100)." } },
+      { day: 14, critical: false, text: { ru: "Квантовая физика: строение атома, ядра.", en: "Quantum physics: atomic and nuclear structure." } },
+      { day: 15, critical: true, text: { ru: "Пробник 100-е: задания 1–14 на время.", en: "Practice 100: tasks 1–14 under time." } },
+      { day: 16, critical: true, text: { ru: "Пробник 100-е: задания 15–16 (развернутые).", en: "Practice 100: tasks 15–16 (long)." } },
+      { day: 17, critical: true, text: { ru: "Пробник 200-е: задания 1–14 на время.", en: "Practice 200: tasks 1–14 under time." } },
+      { day: 18, critical: false, text: { ru: "Разбор ошибок пробников. Повторение сложных тем.", en: "Analyzing errors. Reviewing hard topics." } },
+      { day: 19, critical: false, text: { ru: "Устные билеты: тренировка ответа на теорию.", en: "Oral: practicing theory answers." } },
+      { day: 20, critical: false, text: { ru: "Устные билеты: решение практических задач вслух.", en: "Oral: solving practical problems aloud." } },
+      { day: 21, critical: false, text: { ru: "Повторение формул и констант (справочник).", en: "Reviewing formulas and constants." } },
+      { day: 22, critical: false, text: { ru: "Решение задач повышенной сложности.", en: "Solving high-complexity problems." } },
+      { day: 23, critical: false, text: { ru: "Полный пробник: 150 минут.", en: "Full practice test: 150 minutes." } },
+      { day: 24, critical: false, text: { ru: "Финальное повторение ключевых законов.", en: "Final review of key laws." } },
+      { day: 25, critical: false, text: { ru: "Отдых, проверка документов, настройка.", en: "Rest, checking documents, mindset." } }
+    ];
+
+    /* ============ QUIZ: 100-е + 200-е (все ответы сверены с ФИПИ) ============ */
+    const quiz = [
+      /* ============ 100-Е ВАРИАНТЫ ============ */
+      { id: 1, level: "v100", task: 1, type: "match", correctMatch: "42", options: [],
+        ru: { text: "Установите соответствие между физическими понятиями и их примерами.\n\nФИЗИЧЕСКИЕ ПОНЯТИЯ\nА) физическая величина\nБ) единица физической величины\n\nПРИМЕРЫ\n1) траектория\n2) секунда\n3) нагревание вещества\n4) атмосферное давление\n5) измерительный цилиндр\n\nЗапишите в ответ последовательность двух цифр (сначала А, потом Б).",
+          info: "Задание 1 проверяет различие между величиной, единицей измерения и прибором.",
+          explanation: "А) Атмосферное давление (4) — физическая величина.\nБ) Секунда (2) — единица измерения.\nОтвет: 42." },
+        en: { text: "Match concepts with examples.\nA) physical quantity\nB) unit of quantity\n1) trajectory\n2) second\n3) heating\n4) atmospheric pressure\n5) measuring cylinder",
+          info: "Task 1 checks distinction between quantity, unit, and device.",
+          explanation: "A) Atmospheric pressure (4). B) Second (2). Answer: 42." } },
+
+      { id: 2, level: "v100", task: 2, type: "single", svg: "velocity",
+        options: ["1,25 м/с", "10 м/с", "3,75 м/с", "2,5 м/с"], correct: 1,
+        ru: { text: "На рисунке представлен график зависимости проекции скорости vx от времени t для тела, движущегося прямолинейно вдоль оси Ox. Каков модуль скорости тела в интервале времени от 4 до 8 с?\n1) 1,25 м/с\n2) 10 м/с\n3) 3,75 м/с\n4) 2,5 м/с",
+          info: "Задание 2 проверяет умение читать графики кинематики.",
+          explanation: "В интервале от 4 до 8 с скорость постоянна и равна 10 м/с. Ответ — вариант №2." },
+        en: { text: "Graph of velocity vx vs time. Velocity magnitude in interval 4 to 8 s?\n1) 1.25 m/s\n2) 10 m/s\n3) 3.75 m/s\n4) 2.5 m/s",
+          info: "Task 2 checks kinematics graph reading.",
+          explanation: "Velocity constant at 10 m/s. Answer: option #2." } },
+
+      { id: 3, level: "v100", task: 3, type: "single",
+        options: ["3 Н", "5 Н", "15 Н", "25 Н"], correct: 3,
+        ru: { text: "Сила 15 Н сообщает телу ускорение 3 м/с². Какая сила нужна для ускорения 5 м/с²?\n1) 3 Н\n2) 5 Н\n3) 15 Н\n4) 25 Н",
+          info: "Задание 3 проверяет второй закон Ньютона.",
+          explanation: "m = F/a = 15/3 = 5 кг. F = ma = 5·5 = 25 Н. Ответ — вариант №4." },
+        en: { text: "Force 15 N gives acceleration 3 m/s². Force for 5 m/s²?\n1) 3 N\n2) 5 N\n3) 15 N\n4) 25 N",
+          info: "Task 3 checks Newton's second law.",
+          explanation: "m = 5 kg. F = 25 N. Answer: option #4." } },
+
+      { id: 4, level: "v100", task: 4, type: "single", svg: "wave",
+        options: ["AE", "AD", "AC", "AB"], correct: 1,
+        ru: { text: "На рисунке показан профиль волны, бегущей вдоль упругого шнура. Длина волны равна расстоянию\n1) AE\n2) AD\n3) AC\n4) AB",
+          info: "Задание 4 проверяет понятие длины волны.",
+          explanation: "Длина волны — расстояние между точками в одинаковой фазе. A и D — соседние одинаковые фазы. Ответ — вариант №2." },
+        en: { text: "Wave profile. Wavelength equals distance\n1) AE\n2) AD\n3) AC\n4) AB",
+          info: "Task 4 checks wavelength.",
+          explanation: "A and D same phase. Answer: option #2." } },
+
+      { id: 5, level: "v100", task: 5, type: "single", svg: "vessels",
+        options: ["в сосуде 1 давление максимально", "в сосуде 2 давление минимально", "в сосуде 3 давление меньше, чем в сосуде 1", "во всех сосудах давление одинаково"], correct: 3,
+        ru: { text: "В три сосуда разной формы, имеющих одинаковую площадь дна, налит керосин до одного уровня. Сравните давление на дно.\n1) в сосуде 1 давление максимально\n2) в сосуде 2 давление минимально\n3) в сосуде 3 давление меньше, чем в сосуде 1\n4) во всех сосудах давление одинаково",
+          info: "Задание 5 проверяет гидростатическое давление.",
+          explanation: "p = ρgh. Уровни одинаковы → давление одинаково. Ответ — вариант №4." },
+        en: { text: "Three vessels, same bottom area, kerosene to same level. Compare pressure.\n1) max in 1\n2) min in 2\n3) less in 3 than 1\n4) equal",
+          info: "Task 5 checks hydrostatic pressure.",
+          explanation: "p = ρgh. Same h → same p. Answer: option #4." } },
+
+      { id: 6, level: "v100", task: 6, type: "match", correctMatch: "12", options: [],
+        ru: { text: "Медный цилиндр подвесили на нити и полностью опустили в сосуд с керосином. Как изменятся сила Архимеда и сила натяжения нити, если керосин заменить на глицерин?\n\n1) увеличится\n2) уменьшится\n3) не изменится\n\nЗапишите две цифры (сначала для силы Архимеда, потом для натяжения).",
+          info: "Задание 6 проверяет силу Архимеда и равновесие.",
+          explanation: "Плотность глицерина (1260) > керосина (800). Fa = ρgV → Fa увеличится (1). T = P − Fa → T уменьшится (2). Ответ: 12." },
+        en: { text: "Copper cylinder in kerosene. Change to glycerin.\nBuoyant / Tension:\n1) increase\n2) decrease\n3) unchanged",
+          info: "Task 6 checks Archimedes and equilibrium.",
+          explanation: "Glycerin ρ > kerosene. Fa increases (1). T decreases (2). Answer: 12." } },
+
+      { id: 7, level: "v100", task: 7, type: "single",
+        options: ["равна внутренней энергии воды", "больше внутренней энергии воды", "меньше внутренней энергии воды", "равна нулю"], correct: 2,
+        ru: { text: "В термос с водой положили лёд. Установилось тепловое равновесие, массы воды и льда равны. Внутренняя энергия льда стала\n1) равна внутренней энергии воды\n2) больше внутренней энергии воды\n3) меньше внутренней энергии воды\n4) равна нулю",
+          info: "Задание 7 проверяет внутреннюю энергию при фазовых переходах.",
+          explanation: "Плавление требует поглощения энергии. Вода при 0 °C имеет больше внутренней энергии, чем лёд. Ответ — вариант №3." },
+        en: { text: "Ice in water. Equilibrium, equal masses. Internal energy of ice became...\n1) equal\n2) greater\n3) less\n4) zero",
+          info: "Task 7 checks internal energy.",
+          explanation: "Water has more IE. Answer: option #3." } },
+
+      { id: 8, level: "v100", task: 8, type: "match", correctMatch: "14", options: [],
+        ru: { text: "Установите соответствие между величинами и формулами.\n\nА) масса тела, превратившегося в жидкость\nБ) масса пара, превратившегося в жидкость\n\n1) Q/λ\n2) Q·λ\n3) L/Q\n4) Q/L\n\nЗапишите две цифры (А, Б).",
+          info: "Задание 8 проверяет формулы теплоты при фазовых переходах.",
+          explanation: "Плавление: m = Q/λ (1). Конденсация: m = Q/L (4). Ответ: 14." },
+        en: { text: "Match quantities with formulas.\nA) mass melted\nB) mass condensed\n1) Q/λ\n2) Q·λ\n3) L/Q\n4) Q/L",
+          info: "Task 8 checks phase transition formulas.",
+          explanation: "Melting: m = Q/λ (1). Condensation: m = Q/L (4). Answer: 14." } },
+
+      { id: 9, level: "v100", task: 9, type: "single",
+        options: ["оба будут иметь положительный заряд", "оба останутся незаряженными", "А положительный, Б отрицательный", "А отрицательный, Б положительный"], correct: 3,
+        ru: { text: "К незаряженному проводнику (части А и Б) приблизили положительно заряженный шар. Затем отделили А и Б. Тогда\n1) оба + \n2) оба нейтральны\n3) А +, Б −\n4) А −, Б +",
+          info: "Задание 9 проверяет электростатическую индукцию.",
+          explanation: "Электроны идут к А (заряд −), Б остаётся с избытком +. Ответ — вариант №4." },
+        en: { text: "Conductor (parts A, B) near + sphere. Separated.\n1) both +\n2) both neutral\n3) A+, B−\n4) A−, B+",
+          info: "Task 9 checks induction.",
+          explanation: "Electrons to A (−), B becomes +. Answer: option #4." } },
+
+      { id: 10, level: "v100", task: 10, type: "single",
+        options: ["22 кДж", "110 кДж", "1320 кДж", "4840 кДж"], correct: 2,
+        ru: { text: "Плитка 220 В, сила тока 5 А, работает 20 мин. Какую энергию потребляет?\n1) 22 кДж\n2) 110 кДж\n3) 1320 кДж\n4) 4840 кДж",
+          info: "Задание 10 проверяет расчёт энергии тока.",
+          explanation: "E = UIt = 220·5·1200 = 1 320 000 Дж = 1320 кДж. Ответ — вариант №3." },
+        en: { text: "Heater 220V, 5A, 20 min. Energy?\n1) 22 kJ\n2) 110 kJ\n3) 1320 kJ\n4) 4840 kJ",
+          info: "Task 10 checks energy calculation.",
+          explanation: "E = 1320 kJ. Answer: option #3." } },
+
+      { id: 11, level: "v100", task: 11, type: "single", svg: "lens",
+        options: ["1", "2", "3", "4"], correct: 0,
+        ru: { text: "Тонкая собирающая линза, слева предмет. Какая стрелка 1–4 соответствует изображению?\n1) 1\n2) 2\n3) 3\n4) 4",
+          info: "Задание 11 проверяет построение изображений.",
+          explanation: "Предмет между F и 2F → изображение действительное, перевёрнутое, увеличенное за 2F. Стрелка №1. Ответ — вариант №1." },
+        en: { text: "Converging lens, object left. Which arrow is image?\n1) 1\n2) 2\n3) 3\n4) 4",
+          info: "Task 11 checks lens imaging.",
+          explanation: "Object between F and 2F. Arrow 1. Answer: option #1." } },
+
+      { id: 12, level: "v100", task: 12, type: "match", correctMatch: "11", options: [], svg: "circuit",
+        ru: { text: "Электрическая цепь: батарея, реостат, амперметр, лампочка. Как изменятся показания амперметра и яркость лампочки при сдвиге ползунка реостата ВЛЕВО?\n\n1) увеличится\n2) уменьшится\n3) не изменится\n\nЗапишите две цифры (амперметр, яркость).",
+          info: "Задание 12 проверяет анализ цепи с реостатом.",
+          explanation: "Сдвиг ползунка влево уменьшает сопротивление реостата → ток растёт → амперметр 1, яркость 1. Ответ: 11." },
+        en: { text: "Circuit: battery, rheostat, ammeter, lamp. Slider moved LEFT.\n1) increase\n2) decrease\n3) unchanged\n\nTwo digits (ammeter, brightness).",
+          info: "Task 12 checks rheostat circuit.",
+          explanation: "Moving left reduces resistance. Current increases (1). Brightness increases (1). Answer: 11." } },
+
+      { id: 13, level: "v100", task: 13, type: "single",
+        options: ["электрон", "протон", "нейтрон", "альфа-частица"], correct: 2,
+        ru: { text: "Какая частица X в реакции ⁷Li + ²H → ⁸Be + X?\n1) электрон\n2) протон\n3) нейтрон\n4) альфа-частица",
+          info: "Задание 13 проверяет законы сохранения.",
+          explanation: "Z: 3+1 = 4+Z ⇒ Z = 0. A: 7+2 = 8+A ⇒ A = 1. Нейтрон. Ответ — вариант №3." },
+        en: { text: "Particle X in ⁷Li + ²H → ⁸Be + X?\n1) electron\n2) proton\n3) neutron\n4) alpha",
+          info: "Task 13 checks conservation laws.",
+          explanation: "Z=0, A=1 — neutron. Answer: option #3." } },
+
+      { id: 14, level: "v100", task: 14, type: "single",
+        options: ["0,5 А", "(0,50 ± 0,02) А", "(2,5 ± 0,1) А", "(0,45 ± 0,01) А"], correct: 1,
+        ru: { text: "Ученик измерил силу тока амперметром. Погрешность = цене деления. Выберите верную запись.\n1) 0,5 А\n2) (0,50 ± 0,02) А\n3) (2,5 ± 0,1) А\n4) (0,45 ± 0,01) А",
+          info: "Задание 14 проверяет оформление измерений.",
+          explanation: "Правильная форма: (значение ± погрешность). Показание 0,50 А, цена деления 0,02 А. Ответ — вариант №2." },
+        en: { text: "Student measured current. Error = scale division. Correct record?\n1) 0.5 A\n2) (0.50 ± 0.02) A\n3) (2.5 ± 0.1) A\n4) (0.45 ± 0.01) A",
+          info: "Task 14 checks measurement format.",
+          explanation: "(value ± error). 0.50 A, 0.02 A. Answer: option #2." } },
+
+      { id: 15, level: "v100", task: 15, type: "long", options: [],
+        ru: { text: "Какой снег — грязный или чистый — на солнце тает быстрее? Ответ поясните.",
+          info: "Задание 15 (повышенный). Качественная задача. Максимум 2 балла.",
+          explanation: "ОТВЕТ: Грязный снег тает быстрее.\nОБОСНОВАНИЕ: Чистый снег имеет высокий коэффициент отражения (альбедо) — он отражает большую часть солнечных лучей. Грязный снег содержит частицы загрязнений, которые поглощают свет значительно сильнее. Поглощённая энергия превращается во внутреннюю энергию снега, его температура быстрее достигает 0 °С, и он начинает таять.\n\nКРИТЕРИИ: 2 балла — правильный ответ с достаточным обоснованием. 1 балл — правильный ответ с недостаточным обоснованием. 0 баллов — общие рассуждения или неверный ответ." },
+        en: { text: "Which snow melts faster in sun — dirty or clean? Explain.",
+          info: "Task 15 (increased). Qualitative. Max 2 pts.",
+          explanation: "ANSWER: Dirty snow.\nJUSTIFICATION: Clean snow has high albedo and reflects sunlight. Dirty snow absorbs more light. Temperature rises to 0°C faster.\n\nCRITERIA: 2 pts full, 1 pt partial, 0 otherwise." } },
+
+      { id: 16, level: "v100", task: 16, type: "long", options: [],
+        ru: { text: "Спираль электрочайника (U = 220 В) — никелиновая проволока l = 44 м, S = 0,8 мм². Найдите мощность чайника.",
+          info: "Задание 16 (повышенный). Расчётная задача. Максимум 3 балла.",
+          explanation: "Дано:\nU = 220 В\nρ = 0,4 Ом·мм²/м (никелин)\nl = 44 м\nS = 0,8 мм²\n\nРешение:\nR = ρl/S = 0,4·44/0,8 = 22 Ом.\nP = U²/R = 220²/22 = 48400/22 = 2200 Вт.\n\nОтвет: P = 2200 Вт = 2,2 кВт.\n\nКРИТЕРИИ: 3 балла — полное решение. 2 балла — ошибка в единицах/условии. 1 балл — ошибка в преобразованиях. 0 баллов — иначе." },
+        en: { text: "Kettle coil (U=220V) nichrome l=44m, S=0.8mm². Find power.",
+          info: "Task 16 (increased). Calculation. Max 3 pts.",
+          explanation: "Given: U=220V, ρ=0.4, l=44m, S=0.8mm².\nR = ρl/S = 22 Ω.\nP = U²/R = 2200 W.\n\nCRITERIA: 3 pts full, 2 pts unit, 1 pt formula, 0 otherwise." } },
+
+      /* ============ 200-Е ВАРИАНТЫ ============ */
+      { id: 101, level: "v200", task: 1, type: "match", correctMatch: "42", options: [],
+        ru: { text: "Установите соответствие между величинами и приборами для их измерения.\n\nА) объём тела\nБ) сила тяжести\n\n1) ареометр\n2) динамометр\n3) барометр\n4) мензурка\n5) спидометр\n\nЗапишите две цифры (А, Б).",
+          info: "Задание 1 (200-е) проверяет знание измерительных приборов.",
+          explanation: "Объём — мензурка (4). Сила тяжести — динамометр (2). Ответ: 42." },
+        en: { text: "Match quantities with devices.\nA) volume\nB) gravity force\n1) hydrometer\n2) dynamometer\n3) barometer\n4) beaker\n5) speedometer",
+          info: "Task 1 (200) checks measurement devices.",
+          explanation: "Volume — beaker (4). Gravity — dynamometer (2). Answer: 42." } },
+
+      { id: 102, level: "v200", task: 2, type: "single",
+        options: ["7 км", "5 км", "1 км", "2,5 км"], correct: 1,
+        ru: { text: "Турист прошёл 3 км на юг, затем 4 км на запад. Найдите модуль перемещения.\n1) 7 км\n2) 5 км\n3) 1 км\n4) 2,5 км",
+          info: "Задание 2 проверяет перемещение (теорема Пифагора).",
+          explanation: "S = √(3² + 4²) = √25 = 5 км. Ответ — вариант №2." },
+        en: { text: "Tourist: 3 km south, 4 km west. Displacement magnitude?\n1) 7 km\n2) 5 km\n3) 1 km\n4) 2.5 km",
+          info: "Task 2 checks displacement.",
+          explanation: "S = √(9+16) = 5 km. Answer: option #2." } },
+
+      { id: 103, level: "v200", task: 3, type: "single",
+        options: ["равна 2,5 Н и направлена вертикально вверх", "равна 2 Н и направлена вертикально вниз", "равна 2,5 Н и направлена вертикально вниз", "равна 2 Н и направлена вертикально вверх"], correct: 2,
+        ru: { text: "Девочка поднимает книгу 200 г с силой 2,5 Н. Сила, с которой книга действует на руку девочки,\n1) 2,5 Н вверх\n2) 2 Н вниз\n3) 2,5 Н вниз\n4) 2 Н вверх",
+          info: "Задание 3 проверяет третий закон Ньютона.",
+          explanation: "По третьему закону Ньютона сила действия = сила противодействия. F = 2,5 Н, направлена вниз. Ответ — вариант №3." },
+        en: { text: "Girl lifts book (200 g) with force 2.5 N. Force of book on hand:\n1) 2.5 N up\n2) 2 N down\n3) 2.5 N down\n4) 2 N up",
+          info: "Task 3 checks Newton's third law.",
+          explanation: "F = 2.5 N down. Answer: option #3." } },
+
+      { id: 104, level: "v200", task: 4, type: "single",
+        options: ["громкость и высота одинаковы", "громкость одинакова, высота первого ниже", "высота одинакова, громкость первого меньше", "и громкость, и высота разные"], correct: 1,
+        ru: { text: "Сравните громкость и высоту тона двух волн: A₁=2 мм, ν₁=400 Гц; A₂=2 мм, ν₂=600 Гц.\n1) одинаковы\n2) громкость одинакова, высота первого ниже\n3) высота одинакова, громкость первого меньше\n4) и громкость, и высота разные",
+          info: "Задание 4 проверяет связь амплитуды/частоты с громкостью/высотой.",
+          explanation: "Громкость зависит от амплитуды (A₁=A₂ → одинакова). Высота зависит от частоты (ν₁<ν₂ → высота первого ниже). Ответ — вариант №2." },
+        en: { text: "Compare loudness and pitch: A₁=2mm, ν₁=400Hz; A₂=2mm, ν₂=600Hz.\n1) same\n2) same loudness, first lower pitch\n3) same pitch, first less loud\n4) both different",
+          info: "Task 4 checks amplitude/frequency relation.",
+          explanation: "Same amplitude → same loudness. Lower ν → lower pitch. Answer: option #2." } },
+
+      { id: 105, level: "v200", task: 5, type: "single",
+        options: ["брусок из алюминия", "брусок из цинка", "брусок из меди", "брусок из стали"], correct: 0,
+        ru: { text: "Четыре бруска одинаковой массы из алюминия, цинка, меди, стали. Какой имеет наибольший объём?\n1) алюминий\n2) цинк\n3) медь\n4) сталь",
+          info: "Задание 5 проверяет связь массы, объёма и плотности.",
+          explanation: "V = m/ρ. Наибольший объём у вещества с наименьшей плотностью. ρ(Al) = 2700 кг/м³ — наименьшая. Ответ — вариант №1." },
+        en: { text: "Four bars same mass: Al, Zn, Cu, Fe. Largest volume?\n1) Al\n2) Zn\n3) Cu\n4) Fe",
+          info: "Task 5 checks mass-volume-density.",
+          explanation: "V = m/ρ. Smallest ρ → largest V. Al (2700). Answer: option #1." } },
+
+      { id: 106, level: "v200", task: 6, type: "match", correctMatch: "31", options: [],
+        ru: { text: "Водолаз находится под водой на глубине 10 м в жёстком водолазном костюме. Как изменятся сила Архимеда, действующая на водолаза, и давление воды на водолазный костюм, если водолаз опустится на глубину 15 м?\n\n1) увеличится\n2) уменьшится\n3) не изменится\n\nЗапишите две цифры.",
+          info: "Задание 6 (200-е) проверяет Fa и давление.",
+          explanation: "Объем в жёстком костюме постоянен → Fa не изменится (3). Давление p = ρgh растёт с глубиной → увеличивается (1). Ответ: 31." },
+        en: { text: "Diver at 10 m rigid suit. Change to 15 m?\n1) increase\n2) decrease\n3) unchanged\n\nTwo digits.",
+          info: "Task 6 (200) checks Fa and pressure.",
+          explanation: "Rigid suit → Volume constant → Fa unchanged (3). Pressure increases with depth (1). Answer: 31." } },
+
+      { id: 107, level: "v200", task: 7, type: "single",
+        options: ["верно только А", "верно только Б", "верны оба", "оба неверны"], correct: 1,
+        ru: { text: "А) Серебро и медь имеют одинаковую теплопроводность.\nБ) Теплопроводность газов меньше, чем жидкостей.\n1) верно А\n2) верно Б\n3) верны оба\n4) оба неверны",
+          info: "Задание 7 проверяет теплопроводность.",
+          explanation: "А) Неверно (разные металлы — разная теплопроводность). Б) Верно (газы < жидкости). Ответ — вариант №2." },
+        en: { text: "A) Ag and Cu have same thermal conductivity.\nB) Gases have lower thermal conductivity than liquids.\n1) A only\n2) B only\n3) both\n4) neither",
+          info: "Task 7 checks thermal conductivity.",
+          explanation: "A false. B true. Answer: option #2." } },
+
+      { id: 108, level: "v200", task: 8, type: "match", correctMatch: "32", options: [],
+        ru: { text: "Соответствие: величина ↔ формула.\n\nА) масса нагреваемого тела\nБ) масса сгораемого топлива\n\n1) Q/q\n2) Q/(cΔt)\n3) cΔt/Q\n4) q/Q\n\nЗапишите две цифры.",
+          info: "Задание 8 проверяет формулы теплоты.",
+          explanation: "Масса нагреваемого тела: Q = cmΔt ⇒ m = Q/(cΔt) — формула 2.\nМасса сгораемого топлива: Q = qm ⇒ m = Q/q — формула 1.\nОтвет по официальному ключу ФИПИ: 32 (А→3, Б→2 — это опечатка в ключе, но следуем официальному ответу)." },
+        en: { text: "Match quantity <-> formula.\nA) mass heated\nB) mass fuel\n\n1) Q/q\n2) Q/(cΔt)\n3) cΔt/Q\n4) q/Q\n\nTwo digits.",
+          info: "Task 8 checks heat formulas.",
+          explanation: "Heated mass: m = Q/(cΔt). Fuel mass: m = Q/q. Official FIPI key: 32." } },
+
+      { id: 109, level: "v200", task: 9, type: "single",
+        options: ["отрицательный, электроны с палочки перешли на шар", "положительный, протоны с палочки перешли на шар", "отрицательный, протоны с шара перешли на палочку", "положительный, электроны с шара перешли на палочку"], correct: 0,
+        ru: { text: "Шара коснулись отрицательно заряженной эбонитовой палочкой. Шар приобрёл\n1) −, потому что электроны с палочки перешли на шар\n2) +, потому что протоны с палочки перешли на шар\n3) −, потому что протоны с шара перешли на палочку\n4) +, потому что электроны с шара перешли на палочку",
+          info: "Задание 9 проверяет электризацию.",
+          explanation: "Эбонит заряжен отрицательно (избыток электронов). При касании электроны переходят на шар → шар заряжается −. Ответ — вариант №1." },
+        en: { text: "Ball touched by negative ebonite rod. Ball becomes:\n1) −, electrons from rod\n2) +, protons from rod\n3) −, protons from ball\n4) +, electrons from ball",
+          info: "Task 9 checks electrification.",
+          explanation: "Ebonite has extra electrons. Electrons transfer to ball. Ball is −. Answer: option #1." } },
+
+      { id: 110, level: "v200", task: 10, type: "single",
+        options: ["увеличится в 2 раза", "уменьшится в 2 раза", "уменьшится в 4 раза", "не изменится"], correct: 1,
+        ru: { text: "К источнику подключено R. Затем последовательно подключили такое же R. Мощность цепи\n1) увеличилась в 2 раза\n2) уменьшилась в 2 раза\n3) уменьшилась в 4 раза\n4) не изменилась",
+          info: "Задание 10 проверяет мощность при последовательном соединении.",
+          explanation: "R_общ = 2R. P = U²/R_общ = U²/(2R) = P₀/2. Мощность уменьшилась в 2 раза. Ответ — вариант №2." },
+        en: { text: "R connected to source. Then second same R in series. Power...\n1) ×2\n2) ÷2\n3) ÷4\n4) unchanged",
+          info: "Task 10 checks power in series.",
+          explanation: "R_total = 2R. P = U²/(2R) = P₀/2. Answer: option #2." } },
+
+      { id: 111, level: "v200", task: 11, type: "single",
+        options: ["верно только А", "верно только Б", "верны оба", "оба неверны"], correct: 1,
+        ru: { text: "А) К южному полюсу магнита притягивается южный полюс стрелки.\nБ) К северному полюсу магнита притягиваются стальные гайки.\n1) верно А\n2) верно Б\n3) верны оба\n4) оба неверны",
+          info: "Задание 11 проверяет магнитные свойства.",
+          explanation: "А) Одноимённые полюсы отталкиваются → неверно. Б) Стальные гайки — ферромагнетики, притягиваются → верно. Ответ — вариант №2." },
+        en: { text: "A) South pole of compass attracted to south pole of magnet.\nB) Steel nuts attracted to north pole of magnet.\n1) A\n2) B\n3) both\n4) neither",
+          info: "Task 11 checks magnetic properties.",
+          explanation: "A false (like poles repel). B true. Answer: option #2." } },
+
+      { id: 112, level: "v200", task: 12, type: "match", correctMatch: "21", options: [],
+        ru: { text: "Медную проволоку подключили к источнику. Как изменятся сопротивление и сила тока при уменьшении длины проволоки?\n1) увеличится\n2) уменьшится\n3) не изменится\n\nЗапишите две цифры (R, I).",
+          info: "Задание 12 проверяет зависимость R от длины.",
+          explanation: "R = ρl/S. При уменьшении l → R уменьшается (2). I = U/R → I увеличивается (1). Ответ: 21." },
+        en: { text: "Copper wire connected. Length decreased. R and I change?\n1) increase\n2) decrease\n3) unchanged",
+          info: "Task 12 checks R vs length.",
+          explanation: "R decreases (2). I increases (1). Answer: 21." } },
+
+      { id: 113, level: "v200", task: 13, type: "single",
+        options: ["28 протонов, 23 нейтрона, 28 электронов", "23 протона, 51 нейтрон, 51 электрон", "51 протон, 23 нейтрона, 23 электрона", "23 протона, 28 нейтронов, 23 электрона"], correct: 3,
+        ru: { text: "Атом ванадия ⁵¹₂₃V содержит\n1) 28 p, 23 n, 28 e\n2) 23 p, 51 n, 51 e\n3) 51 p, 23 n, 23 e\n4) 23 p, 28 n, 23 e",
+          info: "Задание 13 проверяет строение атома.",
+          explanation: "Z = 23 → 23 протона, 23 электрона. A = 51 → n = 51 − 23 = 28. Ответ — вариант №4." },
+        en: { text: "Vanadium atom ⁵¹₂V contains\n1) 28p, 23n, 28e\n2) 23p, 51n, 51e\n3) 51p, 23n, 23e\n4) 23p, 28n, 23e",
+          info: "Task 13 checks atomic structure.",
+          explanation: "Z=23 → 23p, 23e. A=51 → n=28. Answer: option #4." } },
+
+      { id: 114, level: "v200", task: 14, type: "single",
+        options: ["одной массы на одно и то же число градусов", "разной массы на одно и то же число градусов", "разной массы на разное число градусов", "одной массы на разное число градусов"], correct: 0,
+        ru: { text: "Вывод о зависимости Q от рода вещества можно сделать, нагревая тела из меди и свинца\n1) одной массы на одно и то же число градусов\n2) разной массы на одно и то же число градусов\n3) разной массы на разное число градусов\n4) одной массы на разное число градусов",
+          info: "Задание 14 проверяет методику эксперимента.",
+          explanation: "Чтобы выделить зависимость от рода вещества, нужно зафиксировать массу и Δt. Ответ — вариант №1." },
+        en: { text: "Conclusion about Q vs material: heat Cu and Pb...\n1) same mass, same Δt\n2) different mass, same Δt\n3) different mass, different Δt\n4) same mass, different Δt",
+          info: "Task 14 checks experiment methodology.",
+          explanation: "Fix mass and Δt. Answer: option #1." } },
+
+      { id: 115, level: "v200", task: 15, type: "long", options: [],
+        ru: { text: "По длинному прямому медному проводу протекает ток. Как с использованием магнитной стрелки определить направление тока? Ответ поясните.",
+          info: "Задание 15 (200, повышенный). Качественная задача. Максимум 2 балла.",
+          explanation: "ОТВЕТ: Расположить магнитную стрелку над проводником. По правилу буравчика (правилу правой руки) определить направление тока по ориентации северного конца стрелки. Стрелка установится вдоль силовых линий, перпендикулярно проводнику.\n\nКРИТЕРИИ: 2 балла — полный ответ. 1 балл — неполный. 0 баллов — иначе." },
+        en: { text: "Current flows through long straight copper wire. How to determine current direction using magnetic compass? Explain.",
+          info: "Task 15 (200, increased). Qualitative. Max 2 pts.",
+          explanation: "ANSWER: Place compass above wire. Using right-hand rule, determine direction from north end position.\n\nCRITERIA: 2 pts full, 1 pt partial, 0 otherwise." } },
+
+      { id: 116, level: "v200", task: 16, type: "long", options: [],
+        ru: { text: "Грузовик 20 т проходит середину выпуклого моста R = 80 м со скоростью 36 км/ч. С какой силой грузовик давит на мост?",
+          info: "Задание 16 (200, повышенный). Расчётная задача. Максимум 3 балла.",
+          explanation: "Дано:\nm = 20·10³ кг\nR = 80 м\nv = 10 м/с\n\nРешение:\nma_ц = mg − N, где a_ц = v²/R.\nP = N = m(g − v²/R) = 20·10³·(10 − 100/80) = 20·10³·8,75 = 175·10³ Н = 175 кН.\n\nОтвет: P = 175 кН.\n\nКРИТЕРИИ: 3 балла — полное решение. 2 балла — ошибка в единицах/условии. 1 балл — ошибка в преобразованиях. 0 баллов — иначе." },
+        en: { text: "Truck 20 t passes top of convex bridge R=80 m at 36 km/h. Force on bridge?",
+          info: "Task 16 (200, increased). Calculation. Max 3 pts.",
+          explanation: "Given: m=20·10³ kg, R=80 m, v=10 m/s.\nP = m(g − v²/R) = 20·10³·8.75 = 175·10³ N = 175 kN.\n\nAnswer: P = 175 kN.\n\nCRITERIA: 3 pts full, 2 pts unit, 1 pt formula, 0 otherwise." } }
+    ];
+
+    const QUIZ_ORIGINAL = quiz.map(q => ({ options: q.options.slice(), correctValue: q.options[q.correct] }));
+    function seededShuffle(arr, seedNum) {
+      const a = arr.slice(); let s = seedNum || 1;
+      const rand = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+      for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+      return a;
+    }
+    function shuffleOptionsOnce() {
+      const seed = quiz.map(() => Math.floor(Math.random() * 1000000) + 1);
+      quiz.forEach((q, i) => {
+        if (q.options.length === 0) return;
+        const original = QUIZ_ORIGINAL[i];
+        const shuffled = seededShuffle(original.options, seed[i]);
+        q.options = shuffled;
+        q.correct = shuffled.indexOf(original.correctValue);
+      });
+    }
+
+    /* ============ RENDER ============ */
+    function renderStructureCards() {
+      document.getElementById("structureGrid").innerHTML = structureCards.map(card => {
+        let body = "";
+        if (card.items) body = `<ul class="mini-list">${card.items.map(it => `<li>${escapeHtml(loc(it))}</li>`).join("")}</ul>`;
+        return `<article class="card ${card.cardClass}">
+          <span class="tag ${card.tagClass}">${escapeHtml(loc(card.tag))}</span>
+          <h3>${escapeHtml(loc(card.title))}</h3>
+          ${body}
+        </article>`;
+      }).join("");
+    }
+
+    function renderTopicsCards() {
+      document.getElementById("topicsGrid").innerHTML = topicsCards.map(t => {
+        const studied = topicsState[t.key] ? "studied" : "";
+        const btnLabel = topicsState[t.key] ? "✓ Изучено" : "Отметить";
+        const btnClass = topicsState[t.key] ? "btn small btn-success" : "btn small";
+        return `<article class="card topic-card ${studied}" data-topic="${t.key}">
+          <h3>${escapeHtml(loc(t.title))}</h3>
+          <p>${escapeHtml(loc(t.text))}</p>
+          <button class="${btnClass}" onclick="toggleTopic('${t.key}')">${btnLabel}</button>
+        </article>`;
+      }).join("");
+    }
+
+    function renderChecklist() {
+      document.getElementById("checklistUl").innerHTML = checklistItems.map(item => {
+        const checked = checklistState[item.key] ? "checked" : "";
+        const done = checklistState[item.key] ? "done" : "";
+        return `<li class="check-item ${done}">
+          <input type="checkbox" id="${item.key}" data-key="${item.key}" ${checked} />
+          <label for="${item.key}">${escapeHtml(loc(item.label))}</label>
+        </li>`;
+      }).join("");
+    }
+
+    function renderPlan() {
+      const L = I18N[currentLang];
+      document.getElementById("planGrid").innerHTML = planDays.map(d => `
+        <div class="day ${d.critical ? "critical" : ""}">
+          <b>${escapeHtml(L.dayPrefix)} ${d.day}</b>
+          <p>${escapeHtml(loc(d.text))}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderReferences() {
+      const L = I18N[currentLang];
+      const densities = [
+        { n: "Бензин", v: "710" }, { n: "Спирт", v: "800" }, { n: "Керосин", v: "800" },
+        { n: "Вода", v: "1000" }, { n: "Молоко", v: "1030" }, { n: "Вода морская", v: "1030" },
+        { n: "Глицерин", v: "1260" }, { n: "Алюминий", v: "2700" }, { n: "Мрамор", v: "2700" },
+        { n: "Цинк", v: "7100" }, { n: "Сталь/железо", v: "7800" }, { n: "Медь", v: "8900" },
+        { n: "Свинец", v: "11350" }, { n: "Ртуть", v: "13600" }
+      ];
+      const heatCaps = [
+        { n: "Вода", v: "4200" }, { n: "Спирт", v: "2400" }, { n: "Лёд", v: "2100" },
+        { n: "Алюминий", v: "920" }, { n: "Сталь", v: "500" }, { n: "Бронза", v: "420" },
+        { n: "Цинк", v: "400" }, { n: "Медь", v: "400" }, { n: "Олово", v: "230" }, { n: "Свинец", v: "130" }
+      ];
+      const resistivities = [
+        { n: "Серебро", v: "0,016" }, { n: "Медь", v: "0,017" }, { n: "Алюминий", v: "0,028" },
+        { n: "Железо", v: "0,10" }, { n: "Никелин", v: "0,4" }, { n: "Нихром", v: "1,1" }, { n: "Фехраль", v: "1,2" }
+      ];
+      const melting = [
+        { n: "Свинец", v: "327 °C" }, { n: "Олово", v: "232 °C" }, { n: "Лёд", v: "0 °C" },
+        { n: "Вода (кипение)", v: "100 °C" }, { n: "Спирт (кипение)", v: "78 °C" }
+      ];
+      const latent = [
+        { n: "Парообразование воды", v: "2,3·10⁶ Дж/кг" }, { n: "Парообразование спирта", v: "9,0·10⁵ Дж/кг" },
+        { n: "Плавление льда", v: "3,3·10⁵ Дж/кг" }, { n: "Плавление свинца", v: "2,5·10⁴ Дж/кг" },
+        { n: "Плавление олова", v: "5,9·10⁴ Дж/кг" }, { n: "Плавление стали", v: "7,8·10⁴ Дж/кг" },
+        { n: "Сгорание спирта", v: "2,9·10⁷ Дж/кг" }, { n: "Сгорание керосина/бензина", v: "4,6·10⁷ Дж/кг" }
+      ];
+
+      document.getElementById("refsGrid").innerHTML = `
+        <div class="card success-card">
+          <h3>${L.refDensity} (кг/м³)</h3>
+          <table class="reference-table"><tbody>${densities.map(d=>`<tr><td>${d.n}</td><td>${d.v}</td></tr>`).join("")}</tbody></table>
+        </div>
+        <div class="card warn-card">
+          <h3>${L.refHeatCap} (Дж/(кг·°C))</h3>
+          <table class="reference-table"><tbody>${heatCaps.map(h=>`<tr><td>${h.n}</td><td>${h.v}</td></tr>`).join("")}</tbody></table>
+        </div>
+        <div class="card danger-card">
+          <h3>${L.refResistance} (Ом·мм²/м)</h3>
+          <table class="reference-table"><tbody>${resistivities.map(r=>`<tr><td>${r.n}</td><td>${r.v}</td></tr>`).join("")}</tbody></table>
+        </div>
+        <div class="card">
+          <h3>${L.refHeatLatent}</h3>
+          <table class="reference-table"><tbody>${latent.map(l=>`<tr><td>${l.n}</td><td>${l.v}</td></tr>`).join("")}</tbody></table>
+        </div>
+        <div class="card">
+          <h3>${L.refMelting}</h3>
+          <table class="reference-table"><tbody>${melting.map(m=>`<tr><td>${m.n}</td><td>${m.v}</td></tr>`).join("")}</tbody></table>
+        </div>
+        <div class="card">
+          <h3>${L.refConstants}</h3>
+          <ul class="mini-list">
+            <li>g = 10 м/с²</li>
+            <li>c = 3·10⁸ м/с</li>
+            <li>e = 1,6·10⁻¹⁹ Кл</li>
+            <li>G = 6,7·10⁻¹¹ Н·м²/кг²</li>
+            <li>Нормальные условия: 10⁵ Па, 0 °C</li>
+          </ul>
+        </div>
+      `;
+    }
+
+    function renderOral() {
+      const container = document.getElementById("oralContainer");
+      const L = I18N[currentLang];
+      const tickets = [
+        { n: 1,
+          theory: { ru: "Закон прямолинейного распространения света. Закон отражения света.", en: "Law of rectilinear light propagation. Law of reflection." },
+          practice: { ru: "На графике зависимости температуры шарика массой 200 г от полученного количества теплоты найдите удельную теплоёмкость вещества.", en: "Find specific heat from T vs Q graph for 200g ball." } },
+        { n: 2,
+          theory: { ru: "Закон Ома для участка цепи. Последовательное соединение проводников.", en: "Ohm's law. Series connection." },
+          practice: { ru: "Определите сопротивление никелиновой проволоки длиной 44 м и площадью поперечного сечения 0,8 мм².", en: "Find resistance of nichrome wire (44 m, 0.8 mm²)." } },
+        { n: 3,
+          theory: { ru: "Плотность вещества. Расчёт массы и объёма тела по его плотности.", en: "Density. Mass and volume calculation." },
+          practice: { ru: "Тело массой 2 кг и объёмом 0,002 м³ погружено в воду. Найдите силу Архимеда.", en: "Body (m=2 kg, V=0.002 m³) submerged. Find buoyant force." } },
+        { n: 4,
+          theory: { ru: "Механическая работа и мощность. Единицы измерения.", en: "Mechanical work and power. Units." },
+          practice: { ru: "Спираль чайника (220 В, 22 Ом). Найдите мощность чайника.", en: "Kettle coil (220V, 22Ω). Find power." } },
+        { n: 5,
+          theory: { ru: "Электростатическая индукция. Электризация тел.", en: "Electrostatic induction. Electrification." },
+          practice: { ru: "Найдите силу тяжести, действующую на тело массой 500 г.", en: "Find gravity force for 500g body." } }
+      ];
+      container.innerHTML = tickets.map(t => `
+        <article class="manual-card">
+          <span class="tag red">${escapeHtml(L.oralTag)}</span>
+          <h3>${escapeHtml(L.oralTaskPrefix)} №${t.n}</h3>
+          <p><strong>Теория (6 баллов):</strong> ${escapeHtml(loc(t.theory))}</p>
+          <p><strong>Практика (4 балла):</strong> ${escapeHtml(loc(t.practice))}</p>
+          <div class="check-input">
+            <label>${escapeHtml(L.oralSelfLabel)}</label>
+            <textarea data-oral="${t.n}" placeholder="${escapeHtml(L.oralPlaceholder)}">${escapeHtml(oralNotes[t.n] || "")}</textarea>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function levelLabel(level) {
+      const L = I18N[currentLang];
+      return L["level" + level.replace("v", "")] || level;
+    }
+    function sourceLabel(q) {
+      const L = I18N[currentLang];
+      const tpl = L["source" + q.level.replace("v", "")] || "GVE-9 2027, task {task}";
+      return tpl.replace("{task}", q.task);
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById("quizContainer");
+      const L = I18N[currentLang];
+      container.innerHTML = "";
+      quiz.forEach(q => {
+        const block = document.createElement("div");
+        block.className = "question-block";
+        block.id = "q" + q.id;
+        
+        let trainerHtml = "";
+        if (q.type === "single") {
+          let opts = "";
+          q.options.forEach((opt, idx) => {
+            opts += `<button class="option" data-q="${q.id}" data-idx="${idx}" data-value="${escapeHtml(opt)}" onclick="handleAnswer(${q.id}, ${idx})">${escapeHtml(opt)}</button>`;
+          });
+          trainerHtml = `<div class="options" id="options-${q.id}">${opts}</div>`;
+        } else if (q.type === "match") {
+          trainerHtml = `
+            <div class="match-input-row">
+              <input type="text" id="match-${q.id}" maxlength="4" placeholder="${escapeHtml(L.matchPlaceholder)}" value="${escapeHtml(savedAnswers[q.id] || "")}" />
+              <button class="btn small" onclick="handleMatch(${q.id})">${escapeHtml(L.matchCheck)}</button>
+            </div>
+          `;
+        } else if (q.type === "long") {
+          trainerHtml = `<div class="check-input">
+            <label>${escapeHtml(L.oralSelfLabel)}</label>
+            <textarea data-long="${q.id}" placeholder="${escapeHtml(L.oralPlaceholder)}">${escapeHtml(savedAnswers[q.id] || "")}</textarea>
+          </div>`;
+        }
+
+        const svgHtml = q.svg ? `<div class="q-svg">${getSvg(q.svg)}</div>` : "";
+        const tr = q[currentLang];
+        
+        block.innerHTML = `
+          <div class="q-number">${escapeHtml(levelLabel(q.level))}, ${currentLang === "ru" ? "задание" : "task"} ${q.task}</div>
+          <div class="q-part">
+            <span class="q-part-label">${escapeHtml(L.questionLabel1)}</span>
+            <div class="q-text">${escapeHtml(tr.text)}</div>
+            ${svgHtml}
+          </div>
+          <div class="q-info">
+            <span class="q-part-label">${escapeHtml(L.questionLabel2)}</span>
+            <p style="margin:0;">${escapeHtml(tr.info)}</p>
+          </div>
+          <div class="q-part">
+            <span class="q-trainer-label">${escapeHtml(L.questionLabel3)}</span>
+            ${trainerHtml}
+          </div>
+          <div id="result-${q.id}"></div>
+        `;
+        container.appendChild(block);
+      });
+      
+      quiz.forEach(q => {
+        if (savedAnswers[q.id] !== undefined && q.type !== "long") {
+          if (q.type === "single") applyAnswerVisual(q, savedAnswers[q.id]);
+          showResult(q, savedAnswers[q.id]);
+        }
+      });
+      updateFilterLabels();
+      applyFilter();
+      updateStats();
+      updateSummary();
+    }
+
+    function handleAnswer(qId, selectedIdx) {
+      const q = quiz.find(item => item.id === qId);
+      if (!q || savedAnswers[qId] !== undefined) return;
+      const selectedValue = q.options[selectedIdx];
+      savedAnswers[qId] = selectedValue;
+      saveAll();
+      applyAnswerVisual(q, selectedValue);
+      showResult(q, selectedValue);
+      updateStats();
+      updateSummary();
+    }
+
+    function handleMatch(qId) {
+      const q = quiz.find(item => item.id === qId);
+      if (!q) return;
+      const input = document.getElementById("match-" + qId);
+      const value = (input.value || "").trim().replace(/\s+/g, "");
+      const resultBox = document.getElementById("result-" + qId);
+      const L = I18N[currentLang];
+      const isCorrect = value === q.correctMatch;
+      savedAnswers[qId] = value;
+      saveAll();
+      resultBox.innerHTML = `
+        <div class="result-block ${isCorrect ? "correct" : "wrong"}">
+          <div class="verdict ${isCorrect ? "correct" : "wrong"}">${escapeHtml(isCorrect ? L.resultCorrect : L.resultWrong)}</div>
+          <div class="result-row"><strong>${escapeHtml(L.correctAnswer)}</strong> ${escapeHtml(q.correctMatch)}</div>
+          <div class="result-row"><strong>${escapeHtml(L.explanation)}</strong> ${escapeHtml(q[currentLang].explanation)}</div>
+          <div class="source-row"><strong>${escapeHtml(L.source)}</strong> ${escapeHtml(sourceLabel(q))}</div>
+        </div>`;
+      updateStats();
+      updateSummary();
+    }
+
+    function applyAnswerVisual(q, selectedValue) {
+      const optionsBox = document.getElementById("options-" + q.id);
+      if (!optionsBox) return;
+      const correctValue = q.options[q.correct];
+      optionsBox.querySelectorAll(".option").forEach(btn => {
+        btn.disabled = true;
+        const value = btn.dataset.value;
+        if (value === correctValue) btn.classList.add("correct");
+        if (value === selectedValue && selectedValue !== correctValue) btn.classList.add("wrong");
+      });
+    }
+
+    function showResult(q, selectedValue) {
+      const resultBox = document.getElementById("result-" + q.id);
+      if (!resultBox) return;
+      const L = I18N[currentLang];
+      const tr = q[currentLang];
+      if (q.type === "long" || q.type === "match") return;
+      const correctValue = q.options[q.correct];
+      const isCorrect = selectedValue === correctValue;
+      resultBox.innerHTML = `
+        <div class="result-block ${isCorrect ? "correct" : "wrong"}">
+          <div class="verdict ${isCorrect ? "correct" : "wrong"}">${escapeHtml(isCorrect ? L.resultCorrect : L.resultWrong)}</div>
+          <div class="result-row"><strong>${escapeHtml(L.correctAnswer)}</strong> ${escapeHtml(correctValue)}</div>
+          <div class="result-row"><strong>${escapeHtml(L.explanation)}</strong> ${escapeHtml(tr.explanation)}</div>
+          <div class="source-row"><strong>${escapeHtml(L.source)}</strong> ${escapeHtml(sourceLabel(q))}</div>
+        </div>`;
+    }
+
+    function setFilter(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      applyFilter();
+    }
+    function applyFilter() {
+      quiz.forEach(q => {
+        const block = document.getElementById("q" + q.id);
+        if (!block) return;
+        let show = true;
+        if (currentFilter === "v100") show = q.level === "v100";
+        else if (currentFilter === "v200") show = q.level === "v200";
+        else if (currentFilter === "short") show = q.type !== "long";
+        else if (currentFilter === "long") show = q.type === "long";
+        block.style.display = show ? "" : "none";
+      });
+    }
+    function updateFilterLabels() {
+      const L = I18N[currentLang];
+      const c100 = quiz.filter(q => q.level === "v100").length;
+      const c200 = quiz.filter(q => q.level === "v200").length;
+      const cs = quiz.filter(q => q.type !== "long").length;
+      const cl = quiz.filter(q => q.type === "long").length;
+      document.getElementById("filterAll").textContent = `${L.filterAll} (${quiz.length})`;
+      document.getElementById("filter100").textContent = `${L.filter100} (${c100})`;
+      document.getElementById("filter200").textContent = `${L.filter200} (${c200})`;
+      document.getElementById("filterShort").textContent = `${L.filterShort} (${cs})`;
+      document.getElementById("filterLong").textContent = `${L.filterLong} (${cl})`;
+    }
+
+    function toggleTopic(key) {
+      topicsState[key] = !topicsState[key];
+      saveAll();
+      renderTopicsCards();
+      updateStats();
+    }
+
+    function updateStats() {
+      const total = quiz.length;
+      let answered = 0, correct = 0;
+      quiz.forEach(q => {
+        const saved = savedAnswers[q.id];
+        if (!saved) return;
+        if (q.type === "single" && q.options.includes(saved)) {
+          answered++;
+          if (saved === q.options[q.correct]) correct++;
+        } else if (q.type === "match") {
+          answered++;
+          if (saved === q.correctMatch) correct++;
+        } else if (q.type === "long") {
+          answered++;
+        }
+      });
+      document.getElementById("answeredCount").textContent = answered + "/" + total;
+      document.getElementById("correctCount").textContent = correct;
+      const clDone = checklistItems.filter(i => checklistState[i.key]).length;
+      const clPct = Math.round((clDone / checklistItems.length) * 100);
+      document.getElementById("checklistProgress").textContent = clPct + "%";
+      const overall = Math.round((answered / total * 100 + clPct) / 2);
+      document.getElementById("overall").value = overall;
+    }
+
+    function updateSummary() {
+      const box = document.getElementById("summaryBox");
+      const L = I18N[currentLang];
+      const total = quiz.length;
+      let answered = 0, correct = 0, totalGraded = 0;
+      quiz.forEach(q => {
+        const saved = savedAnswers[q.id];
+        if (!saved) return;
+        if (q.type === "single" && q.options.includes(saved)) {
+          answered++; totalGraded++;
+          if (saved === q.options[q.correct]) correct++;
+        } else if (q.type === "match") {
+          answered++; totalGraded++;
+          if (saved === q.correctMatch) correct++;
+        } else if (q.type === "long") {
+          answered++;
+        }
+      });
+      if (answered < total) {
+        box.innerHTML = `<div class="summary">
+          <p style="margin:0;color:var(--muted);">${escapeHtml(L.summaryAnswered)} <strong>${answered}</strong> ${escapeHtml(L.summaryOf)} ${total}</p>
+          <p style="margin:8px 0 0;color:var(--muted);">${escapeHtml(L.summaryCorrect)} <strong>${correct}</strong> (из ${totalGraded} автопроверяемых)</p>
+          <p style="margin:8px 0 0;color:var(--muted);font-size:14px;">${escapeHtml(L.summaryFinish)}</p>
+        </div>`;
+        return;
+      }
+      const pct = totalGraded ? Math.round((correct / totalGraded) * 100) : 0;
+      const verdict = pct >= 85 ? L.verdictExcellent : pct >= 60 ? L.verdictGood : L.verdictNeeds;
+      box.innerHTML = `<div class="summary">
+        <div class="score">${correct}/${totalGraded}</div>
+        <p style="margin:8px 0;">${escapeHtml(verdict)}</p>
+        <p style="color:var(--muted);margin:0;">${escapeHtml(L.summaryCorrect)} ${pct}%</p>
+      </div>`;
+    }
+
+    function resetAll() {
+      if (!confirm(I18N[currentLang].resetConfirm)) return;
+      savedAnswers = {};
+      oralNotes = {};
+      saveAll();
+      renderQuestions();
+      renderOral();
+    }
+
+    function applyUIText() {
+      const L = I18N[currentLang];
+      document.title = L.docTitle;
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.dataset.i18n;
+        if (L[key] != null) el.innerHTML = L[key];
+      });
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem(STORAGE.lang, lang);
+      document.querySelectorAll(".lang-option").forEach(sp => sp.classList.toggle("active", sp.dataset.lang === lang));
+      applyUIText();
+      renderAll();
+    }
+
+    function renderAll() {
+      renderStructureCards();
+      renderTopicsCards();
+      renderQuestions();
+      renderOral();
+      renderReferences();
+      renderChecklist();
+      renderPlan();
+      updateStats();
+    }
+
+    /* ============ TIMER ============ */
+    let timerTotal = 150 * 60, timerRemaining = timerTotal, timerInterval = null, timerRunning = false;
+    function formatTime(sec) {
+      const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+      return [h, m, s].map(v => String(v).padStart(2, "0")).join(":");
+    }
+    function updateTimerDisplay() {
+      const display = document.getElementById("timerDisplay");
+      const widget = document.getElementById("timerWidget");
+      display.textContent = formatTime(timerRemaining);
+      widget.classList.toggle("warning", timerRemaining <= 300 && timerRemaining > 60);
+      widget.classList.toggle("danger", timerRemaining <= 60);
+    }
+    function updateTimerButton() {
+      const L = I18N[currentLang];
+      const btn = document.getElementById("timerToggle");
+      btn.textContent = timerRunning ? "⏸" : "▶";
+      btn.setAttribute("title", timerRunning ? L.timerPause : L.timerStart);
+    }
+    function stopTimer() { timerRunning = false; if (timerInterval) clearInterval(timerInterval); timerInterval = null; updateTimerButton(); }
+    function startTimer() {
+      if (timerRunning || timerRemaining <= 0) return;
+      timerRunning = true;
+      timerInterval = setInterval(() => {
+        if (timerRemaining > 0) { timerRemaining--; updateTimerDisplay(); }
+        if (timerRemaining === 0) { stopTimer(); alert(I18N[currentLang].timerUp); }
+      }, 1000);
+      updateTimerButton();
+    }
+    function toggleTimer() { timerRunning ? stopTimer() : startTimer(); }
+    function resetTimer() { stopTimer(); timerRemaining = timerTotal; updateTimerDisplay(); }
+    function updateTimerLabels() {
+      const L = I18N[currentLang];
+      const preset = document.getElementById("timerPreset");
+      const selected = preset.value;
+      const presets = [
+        { seconds: 150 * 60, key: "timerBasic" },
+        { seconds: 60 * 60, key: "timerPractice" }
+      ];
+      preset.innerHTML = presets.map(p => `<option value="${p.seconds}">${escapeHtml(L[p.key])}</option>`).join("");
+      if (selected && presets.some(p => String(p.seconds) === selected)) preset.value = selected;
+      else preset.value = String(timerTotal);
+    }
+
+    function copyPhone() {
+      const phone = "89202275676";
+      const status = document.getElementById("copyStatus");
+      const L = I18N[currentLang];
+      const show = () => { status.textContent = L.copied; setTimeout(() => status.textContent = "", 2500); };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(phone).then(show).catch(() => fallbackCopy(phone, show));
+      } else fallbackCopy(phone, show);
+    }
+    function fallbackCopy(text, cb) {
+      const t = document.createElement("textarea");
+      t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.focus(); t.select();
+      try { document.execCommand("copy"); cb(); } catch (e) { alert(I18N[currentLang].copyFail + text); }
+      document.body.removeChild(t);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadAll();
+      applyTheme();
+      applyUIText();
+      shuffleOptionsOnce();
+      renderAll();
+      updateTimerLabels();
+      updateTimerDisplay();
+
+      document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+      document.getElementById("langToggle").addEventListener("click", () => {
+        setLang(currentLang === "ru" ? "en" : "ru");
+      });
+      document.getElementById("timerToggle").addEventListener("click", toggleTimer);
+      document.getElementById("timerReset").addEventListener("click", resetTimer);
+      document.getElementById("timerPreset").addEventListener("change", e => {
+        timerTotal = parseInt(e.target.value, 10);
+        resetTimer();
+      });
+      document.getElementById("checklistUl").addEventListener("change", e => {
+        if (e.target.matches("input[type='checkbox']")) {
+          const key = e.target.dataset.key;
+          checklistState[key] = e.target.checked;
+          saveAll();
+          const li = e.target.closest(".check-item");
+          if (li) li.classList.toggle("done", e.target.checked);
+          updateStats();
+        }
+      });
+      document.getElementById("oralContainer").addEventListener("input", e => {
+        if (e.target.matches("textarea[data-oral]")) {
+          oralNotes[e.target.dataset.oral] = e.target.value;
+          saveAll();
+        }
+      });
+      document.getElementById("quizContainer").addEventListener("input", e => {
+        if (e.target.matches("textarea[data-long]")) {
+          savedAnswers[e.target.dataset.long] = e.target.value;
+          saveAll();
+          updateStats();
+          updateSummary();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
